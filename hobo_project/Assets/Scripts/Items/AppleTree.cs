@@ -37,17 +37,6 @@ public class AppleTree : MonoBehaviour
         time = 0;
         int spawnPointIndex = UnityEngine.Random.Range(0, SpawnPoints.Length);
         Transform spawnPoint = SpawnPoints[spawnPointIndex];
-        var apple = Instantiate(Apple, spawnPoint.position, spawnPoint.rotation);
-
-        float scaler = UnityEngine.Random.Range(0.8f, 1f);
-        apple.transform.localScale = new Vector3(scaler, scaler, scaler);
-
-        var appleRb = apple.GetComponent<Rigidbody>();
-        appleRb.velocity = new Vector3(appleRb.velocity.x + getOffSetForce(), appleRb.velocity.y, appleRb.velocity.z + getOffSetForce());
-    }
-
-    private float getOffSetForce()
-    {
-        return UnityEngine.Random.Range(-0.5f, 0.5f);
+        GameObjectFactory.Instance.SpawnApple(spawnPoint);
     }
 }

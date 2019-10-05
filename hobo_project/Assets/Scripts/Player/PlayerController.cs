@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
         yMoveInput = player.Device.LeftStickY; // ?? player.Device.DPadY;
 
         Vector3 movement = new Vector3(xMoveInput * speed, rb.velocity.y, yMoveInput * speed);
+        //adapt to camera angle 
+        movement = Quaternion.AngleAxis(-45, Vector3.up) * movement;
+
         rb.velocity = movement;
         if (movement != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
 
