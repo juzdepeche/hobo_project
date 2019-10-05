@@ -56,5 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             GameObjectFactory.Instance.SpawnApple(gameObject.transform);
         }
+        inventory.appleNumber = 0;
+        inventory.money = 0;
     }
 }
