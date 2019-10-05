@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 8681332823320479437}
   - component: {fileID: 6479793048945988320}
   - component: {fileID: 4217492503101870904}
+  - component: {fileID: 835463489749489826}
   m_Layer: 0
   m_Name: CarSpawner
   m_TagString: Untagged
@@ -238,6 +239,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &835463489749489826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053028706911786710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a43813c07e4d5048be460b937aa1fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8763513875419749939
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +371,7 @@ PrefabInstance:
     - target: {fileID: 2324781955831962095, guid: 214ed00187e3a684592c27c9dfaa8b9b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.94
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 2324781955831962095, guid: 214ed00187e3a684592c27c9dfaa8b9b,
         type: 3}
@@ -438,7 +451,7 @@ PrefabInstance:
     - target: {fileID: 2324781955831962095, guid: 214ed00187e3a684592c27c9dfaa8b9b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2324781955831962095, guid: 214ed00187e3a684592c27c9dfaa8b9b,
         type: 3}
@@ -518,7 +531,7 @@ PrefabInstance:
     - target: {fileID: 2324781955831962095, guid: 214ed00187e3a684592c27c9dfaa8b9b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.73
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 2324781955831962095, guid: 214ed00187e3a684592c27c9dfaa8b9b,
         type: 3}

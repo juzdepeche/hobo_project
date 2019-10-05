@@ -19,7 +19,7 @@ public class CarManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         InvokeRepeating("SpawnCar", 1.0f, 0.5f);
     }
 

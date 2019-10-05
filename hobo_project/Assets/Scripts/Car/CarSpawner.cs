@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarStopper : MonoBehaviour
+public class CarSpawner : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,17 +14,5 @@ public class CarStopper : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Car")
-        {
-            var car = other.gameObject.GetComponent<CarMouvement>();
-            if (car)
-            {
-                car.needToStop = false;
-            }
-        }
     }
 }

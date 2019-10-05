@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2767832068159987005}
-  m_Mesh: {fileID: 6151557186590063269, guid: cd56bbd033a33424da00fa2176a3b7c7, type: 3}
+  m_Mesh: {fileID: -4967082104771753876, guid: bd6f3a54f7f684e4bad1345e5314fe1c, type: 3}
 --- !u!23 &4491644178971650529
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -93,6 +93,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61487f28d56401744ba1ec68c5a88094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  spawnId: 0
+  lastParkingHit: 0
+  parkingId: 0
+  needToStop: 1
+  askToStop: 0
+  hasToStop: 0
 --- !u!65 &5643578732130019954
 BoxCollider:
   m_ObjectHideFlags: 0
