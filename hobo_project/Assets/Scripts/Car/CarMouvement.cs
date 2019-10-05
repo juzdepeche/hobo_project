@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class CarMouvement : MonoBehaviour
 {
-    private float speed = 20.0f;
+    public int spawnId = 0;
+    public bool needToStop = true;
+    public bool managerAskStop = false;
 
+    private float speed = 10.0f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +19,9 @@ public class CarMouvement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += (transform.forward * speed) * Time.deltaTime;
+        if (!managerAskStop)
+        {
+            transform.position += (transform.forward * speed) * Time.deltaTime;
+        }
     }
 }

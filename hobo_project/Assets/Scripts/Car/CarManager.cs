@@ -1,33 +1,94 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CarManager : MonoBehaviour
 {
+    public int id = 0;
+
     public GameObject myPrefab;
 
     public Transform carSpawner;
     public Transform carKiller;
 
-    public float spawnInterval = 0.01f;
+    public bool isStoppable = false;
 
-    private float nextSpawn = 0.0f;
+    private bool isSpawning = false;
+    private bool isStopping = false;
 
     // Start is called before the first frame update
     void Start()
-    {
-        //InvokeRepeating("LaunchProjectile", 2.0f, 0.3f);
-        InvokeRepeating("SpawnCar", 1.0f, 0.1f);
+    {        
+        InvokeRepeating("SpawnCar", 1.0f, 0.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isStoppable)
+        {
+            if (Input.GetKeyDown("w"))
+            {
+                isSpawning = !isSpawning;
+            }
 
+            if (Input.GetKeyDown("f"))
+            {
+                isStopping = !isStopping;
+                if (isStopping)
+                {
+                    isSpawning = false;
+                    StopCars(true);
+                }
+                else
+                {
+                    isSpawning = true;
+                    StopCars(false);
+                }
+            }
+        }
+    }
+
+    private void RestartCars()
+    {
+        var cars = FindObjectsOfType<CarMouvement>();
+        if (cars.Any())
+        {
+            cars = cars.Where(c => c.spawnId == id && c.needToStop == true).ToArray();
+            foreach (var car in cars)
+            {
+                car.managerAskStop = false;
+            }
+        }
+    }
+
+    private void StopCars(bool Stop)
+    {
+        var cars = FindObjectsOfType<CarMouvement>();
+        if (cars.Any())
+        {
+            cars = cars.Where(c => c.spawnId == id && c.needToStop == true).ToArray();
+            foreach (var car in cars)
+            {
+                car.managerAskStop = Stop;
+            }
+        }
     }
 
     private void SpawnCar()
     {
-        Instantiate(myPrefab, carSpawner.position, carSpawner.rotation);
+        if (isSpawning)
+        {
+            GameObject car = Instantiate(myPrefab, carSpawner.position, carSpawner.rotation) as GameObject;
+            CarMouvement carMouvement = car.GetComponent<CarMouvement>();
+
+            if (carMouvement)
+            {
+                carMouvement.spawnId = id;
+                carMouvement.needToStop = true;
+            }
+        }
     }
 }
+

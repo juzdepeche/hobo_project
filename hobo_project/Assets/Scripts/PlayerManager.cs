@@ -19,7 +19,6 @@ public class PlayerManager : MonoBehaviour
     
     void Update()
     {
-        /*
         foreach (var device in InputManager.Devices)
         {
             if (device.GetControl(InputControlType.Action1).WasPressed)
@@ -31,7 +30,6 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
-        */
     }
 
     private Player GetPlayerFromDeviceGUID(Guid guid)

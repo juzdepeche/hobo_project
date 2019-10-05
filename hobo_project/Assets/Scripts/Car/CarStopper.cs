@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarKiller : MonoBehaviour
+public class CarStopper : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -20,11 +20,11 @@ public class CarKiller : MonoBehaviour
     {
         if (other.tag == "Car")
         {
-            var obj = other.gameObject.GetComponent<CarMouvement>();
-            if (obj)
-                Debug.Log(obj.spawnId);
-
-            Destroy(other.gameObject);
+            var car = other.gameObject.GetComponent<CarMouvement>();
+            if (car)
+            {
+                car.needToStop = false;
+            }
         }
     }
 }
