@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     public Transform[] SpawnPoints;
     public Transform DeadzonePoint;
 
+    private float timePeriode = 0.0f;
+    public float timeEndGame = 60.0f;
+
     private void Awake()
     {
         Players = new List<GameObject>();
@@ -29,6 +32,12 @@ public class GameController : MonoBehaviour
         WatchState("update_money_ui");
 
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        timePeriode += Time.deltaTime;
+        if (timePeriode >= timeEndGame)
         {
             SceneManager.LoadScene(0);
         }
