@@ -19,16 +19,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void NotifyPlayerPresenceIntoMarket(PlayerController player, string marketType, Func<GameObject, IStateResponse> actionCallback)
+    private void Update()
     {
-        string key = ConcatPlayerKey(player, marketType);
-        SetPlayerStateValue(key, new State(marketType, true, actionCallback));
+        WatchState("player_death");
     }
 
-    public void NotifyPlayerExitFromMarket(PlayerController player, string marketType)
+    public void NotifyPlayerState(PlayerController player, string marketType, bool activate, Func<GameObject, IStateResponse> actionCallback = null)
     {
         string key = ConcatPlayerKey(player, marketType);
-        SetPlayerStateValue(key, new State(marketType, false));
+        SetPlayerStateValue(key, new State(marketType, activate, actionCallback));
     }
 
     public void AddPlayer(GameObject newPlayer)
@@ -72,5 +71,22 @@ public class GameController : MonoBehaviour
                 state.Value.CallbackAction(PlayerManager.GetPlayerGameObjectFromDeviceGUID(Players, guid));
             }
         }
+    }
+
+    private void WatchState(string stateType)
+    {
+        List<string> keys = new List<string>(PlayerState.Keys);
+        foreach (string key in keys)
+        {
+            if (key.Contains(stateType) && PlayerState[key].Activated)
+            {
+                PlayerState[key].CallbackAction(PlayerManager.GetPlayerGameObjectFromDeviceGUID(Players, GetGUIDFromPlayerState(key)));
+            }
+        }
+    }
+
+    private string GetGUIDFromPlayerState(string state)
+    {
+        return state.Split('_')[0];
     }
 }

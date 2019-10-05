@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     public float yMoveInput;
     public float speed = 10f;
     private Rigidbody rb;
+    private Inventory inventory;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        inventory = GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -45,5 +47,16 @@ public class PlayerController : MonoBehaviour
     private string GetPlayerGUID()
     {
         return player.Device.GUID.ToString();
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+        for(var i =0; i < inventory.appleNumber; i++)
+        {
+            GameObjectFactory.Instance.SpawnApple(gameObject.transform);
+        }
+        inventory.appleNumber = 0;
+        inventory.money = 0;
     }
 }

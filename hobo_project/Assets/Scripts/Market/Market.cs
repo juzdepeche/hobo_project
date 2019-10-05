@@ -10,7 +10,7 @@ public class Market : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            GameController.Instance.NotifyPlayerPresenceIntoMarket(other.gameObject.GetComponent<PlayerController>(), "apple_market", SellApples);
+            GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "apple_market", true, SellApples);
         }
     }
 
@@ -29,7 +29,7 @@ public class Market : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameController.Instance.NotifyPlayerExitFromMarket(other.gameObject.GetComponent<PlayerController>(), "apple_market");
+            GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "apple_market", false);
         }
     }
 }

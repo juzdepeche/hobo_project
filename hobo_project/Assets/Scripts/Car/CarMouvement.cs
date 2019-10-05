@@ -33,4 +33,21 @@ public class CarMouvement : MonoBehaviour
             transform.position += (transform.forward * speed) * Time.deltaTime;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "player_death", true, KillPlayer);
+        }
+    }
+
+    private IStateResponse KillPlayer(GameObject player)
+    {
+        BaseResponse response = new BaseResponse();
+        player.GetComponent<PlayerController>().Die();
+        response.Success = true;
+        GameController.Instance.NotifyPlayerState(player.GetComponent<PlayerController>(), "player_death", false, null);
+        return response;
+    }
 }
