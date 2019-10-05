@@ -5,7 +5,7 @@ using UnityEngine;
 public class Apple : MonoBehaviour
 {
     public float lifeTime;
-    public float value;
+    public int value;
     // Start is called before the first frame update
     void Start()
     {
