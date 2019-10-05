@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Map.unity
     guid: 36058e07595a65f4aab342044c976e28
   - enabled: 1
-    path: Assets/Scenes/Respawn.unity
-    guid: 06cacc8907d6d544087159803fb36a63
+    path: Assets/Scenes/GameOver.unity
+    guid: dd72b6f407794284b99e0f9ec539dd2a
   m_configObjects: {}

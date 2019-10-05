@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     public Transform[] SpawnPoints;
     public Transform DeadzonePoint;
 
+    private float timePeriode = 0.0f;
+    private float timeEndGame = 180.0f;
+
     private void Awake()
     {
         Players = new List<GameObject>();
@@ -31,6 +34,12 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(0);
+        }
+
+        timePeriode += Time.deltaTime;
+        if (timePeriode >= timeEndGame)
+        {
+            SceneManager.LoadScene(2);
         }
     }
 
