@@ -3144,6 +3144,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 318953ffcb5fa36439445a2c466e507e,
         type: 3}
+    - target: {fileID: 5393803953686627297, guid: a26792c65eafe2342baf127d43868d1f,
+        type: 3}
+      propertyPath: moneyState1
+      value: 
+      objectReference: {fileID: 21300000, guid: 71d8993feabec6c4c9043f73343eb27c,
+        type: 3}
+    - target: {fileID: 5393803953686627297, guid: a26792c65eafe2342baf127d43868d1f,
+        type: 3}
+      propertyPath: moneyState2
+      value: 
+      objectReference: {fileID: 21300000, guid: a399bb69a752d2f41b4b90726b9eaabd,
+        type: 3}
+    - target: {fileID: 5393803953686627297, guid: a26792c65eafe2342baf127d43868d1f,
+        type: 3}
+      propertyPath: moneyState3
+      value: 
+      objectReference: {fileID: 21300000, guid: 21c56bcf184feb84f88d6d08ca0e7aa5,
+        type: 3}
+    - target: {fileID: 5393803953686627297, guid: a26792c65eafe2342baf127d43868d1f,
+        type: 3}
+      propertyPath: moneyState4
+      value: 
+      objectReference: {fileID: 21300000, guid: e054e81a0aa2a064180de389d0deb1e3,
+        type: 3}
+    - target: {fileID: 5393803953686627297, guid: a26792c65eafe2342baf127d43868d1f,
+        type: 3}
+      propertyPath: moneyState5
+      value: 
+      objectReference: {fileID: 21300000, guid: bd44b7400a6f9af4a9022815b952ffd4,
+        type: 3}
     - target: {fileID: 5393803954174370161, guid: a26792c65eafe2342baf127d43868d1f,
         type: 3}
       propertyPath: m_Name
