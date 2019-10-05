@@ -21,7 +21,9 @@ public class PlayerController : MonoBehaviour
         xMoveInput = player.Device.LeftStickX; // ?? player.Device.DPadX;
         yMoveInput = player.Device.LeftStickY; // ?? player.Device.DPadY;
 
-        rb.velocity = new Vector3(xMoveInput * speed, rb.velocity.y, yMoveInput * speed);
+        Vector3 movement = new Vector3(xMoveInput * speed, rb.velocity.y, yMoveInput * speed);
+        rb.velocity = movement;
+        if (movement != Vector3.zero) transform.rotation = Quaternion.LookRotation(movement);
     }
 
     public void SetPlayerDevice(Player player)
