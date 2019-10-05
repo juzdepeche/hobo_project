@@ -26,18 +26,20 @@ public class PlayerManager : MonoBehaviour
                 Player newPlayer = CreatePlayerForDevice(device);
                 if (newPlayer != null)
                 {
-                    PlayerFactory.Instance.SpawnPlayer(newPlayer);
+                    var newPlayerGameObject = PlayerFactory.Instance.SpawnPlayer(newPlayer);
+                    GameController.Instance.AddPlayer(newPlayerGameObject);
                 }
             }
         }
     }
 
-    private Player GetPlayerFromDeviceGUID(Guid guid)
+    public static GameObject GetPlayerGameObjectFromDeviceGUID(List<GameObject> players, string guid)
     {
         foreach (var player in players)
         {
-            if (player.Device == null) continue;
-            if (player.Device.GUID == guid)
+            var device = player.GetComponent<PlayerController>().GetPlayerDevice();
+            if (device == null) continue;
+            if (device.GUID.ToString() == guid)
             {
                 return player;
             }
