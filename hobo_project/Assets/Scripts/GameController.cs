@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     public Transform DeadzonePoint;
 
     private float timePeriode = 0.0f;
-    public float timeEndGame = 60.0f;
+    private float timeEndGame = 180.0f;
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         timePeriode += Time.deltaTime;
         if (timePeriode >= timeEndGame)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
     }
 

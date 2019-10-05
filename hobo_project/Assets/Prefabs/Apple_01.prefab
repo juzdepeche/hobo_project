@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 235579872365814503}
   - component: {fileID: 235579872365814497}
   - component: {fileID: 7780569621645697315}
+  - component: {fileID: 813742710569379254}
   m_Layer: 0
   m_Name: Apple_01
   m_TagString: Untagged
@@ -124,3 +125,15 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.16795355
   m_Center: {x: 0, y: 0.06193605, z: 0}
+--- !u!122 &813742710569379254
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8098914359033232663}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 989917695
+  m_Size: 0.2
