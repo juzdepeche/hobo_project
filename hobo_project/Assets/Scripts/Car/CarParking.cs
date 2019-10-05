@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarKiller : MonoBehaviour
+public class CarParking : MonoBehaviour
 {
+    public int id;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,11 @@ public class CarKiller : MonoBehaviour
     {
         if (other.tag == "Car")
         {
-            Destroy(other.gameObject);
+            var car = other.gameObject.GetComponent<CarMouvement>();
+            if (car && car.askToStop && car.parkingId == id)
+            {
+                car.hasToStop = true;
+            }
         }
     }
 }

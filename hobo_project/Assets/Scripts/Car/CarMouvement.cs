@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class CarMouvement : MonoBehaviour
 {
+    public int id = 0;
     public int spawnId = 0;
+    public int parkingId = 0;
+    
+    // Is change when the car pass trough the stop line.
     public bool needToStop = true;
-    public bool managerAskStop = false;
+    // The manager as the car to stop at the next oportunity.
+    public bool askToStop = false;
+    // When the oportunity as happened make the carstop.
+    public bool hasToStop = false;
+
 
     private float speed = 10.0f;
     
@@ -19,7 +27,7 @@ public class CarMouvement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!managerAskStop)
+        if (!hasToStop)
         {
             transform.position += (transform.forward * speed) * Time.deltaTime;
         }

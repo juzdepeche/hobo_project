@@ -6,13 +6,14 @@ using System.Linq;
 public class CarManager : MonoBehaviour
 {
     public int id = 0;
+    public int lastCarId = 1;
 
     public GameObject myPrefab;
 
     public Transform carSpawner;
     public Transform carKiller;
 
-    public bool isStoppable = false;
+    public bool isActive = false;
 
     private bool isSpawning = false;
     private bool isStopping = false;
@@ -26,13 +27,8 @@ public class CarManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isStoppable)
+        if (isActive)
         {
-            if (Input.GetKeyDown("w"))
-            {
-                isSpawning = !isSpawning;
-            }
-
             if (Input.GetKeyDown("f"))
             {
                 isStopping = !isStopping;
@@ -50,28 +46,32 @@ public class CarManager : MonoBehaviour
         }
     }
 
-    private void RestartCars()
-    {
-        var cars = FindObjectsOfType<CarMouvement>();
-        if (cars.Any())
-        {
-            cars = cars.Where(c => c.spawnId == id && c.needToStop == true).ToArray();
-            foreach (var car in cars)
-            {
-                car.managerAskStop = false;
-            }
-        }
-    }
-
     private void StopCars(bool Stop)
     {
         var cars = FindObjectsOfType<CarMouvement>();
         if (cars.Any())
         {
-            cars = cars.Where(c => c.spawnId == id && c.needToStop == true).ToArray();
+            if (!Stop)
+            {
+                lastCarId = 0;
+            }
+
+            cars = cars.Where(c => c.spawnId == id && c.needToStop == true).OrderBy(c => c.id).ToArray();
+
+            int parkingId = 1;
             foreach (var car in cars)
             {
-                car.managerAskStop = Stop;
+                car.askToStop = Stop;
+                if (Stop)
+                {
+                    car.parkingId = parkingId;
+                    parkingId++;
+                }
+                else
+                {
+                    car.hasToStop = false;
+                    car.parkingId = 0;
+                }
             }
         }
     }
@@ -85,8 +85,11 @@ public class CarManager : MonoBehaviour
 
             if (carMouvement)
             {
+                carMouvement.id = lastCarId;
                 carMouvement.spawnId = id;
                 carMouvement.needToStop = true;
+
+                lastCarId++;
             }
         }
     }
