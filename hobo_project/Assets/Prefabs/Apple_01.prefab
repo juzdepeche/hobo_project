@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 30
-  value: 0
+  value: 1
 --- !u!135 &7780569621645697315
 SphereCollider:
   m_ObjectHideFlags: 0

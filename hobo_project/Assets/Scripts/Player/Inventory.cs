@@ -6,7 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public int appleNumber = 0;
-
+    public int money = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(money);
     }
 
     public void AddApple(int appleNumber)
