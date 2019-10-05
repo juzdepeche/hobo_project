@@ -44,7 +44,7 @@ public class CarMouvement : MonoBehaviour
     private IStateResponse KillPlayer(GameObject player)
     {
         BaseResponse response = new BaseResponse();
-        Destroy(player);
+        player.GetComponent<PlayerController>().Die();
         response.Success = true;
         GameController.Instance.NotifyPlayerState(player.GetComponent<PlayerController>(), "player_death", false, null);
         return response;
