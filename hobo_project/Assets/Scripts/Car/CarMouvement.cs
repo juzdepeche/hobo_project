@@ -6,6 +6,7 @@ public class CarMouvement : MonoBehaviour
 {
     public int id = 0;
     public int spawnId = 0;
+    public int lastParkingHit = 0;
     public int parkingId = 0;
     
     // Is change when the car pass trough the stop line.
