@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
 
     public List<Player> players;
     private List<Guid> deviceGUID;
-    
+
     void Start()
     {
         players = new List<Player>();
