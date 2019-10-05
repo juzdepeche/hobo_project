@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         WatchState("player_death");
+        WatchState("update_apple_ui");
+        WatchState("update_money_ui");
     }
 
     public void NotifyPlayerState(PlayerController player, string marketType, bool activate, Func<GameObject, IStateResponse> actionCallback = null)

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Inventory : MonoBehaviour
 {
@@ -22,5 +23,51 @@ public class Inventory : MonoBehaviour
     public void AddApple(int appleNumber)
     {
         this.appleNumber += appleNumber;
+
+        GameController.Instance.NotifyPlayerState(gameObject.GetComponent<PlayerController>(), "update_apple_ui", true, updateAppleText);
+    }
+
+    public void SellApples(int applePrice)
+    {
+        int appleNumber = this.appleNumber;
+        this.appleNumber = 0;
+        this.money += appleNumber * applePrice;
+        GameController.Instance.NotifyPlayerState(gameObject.GetComponent<PlayerController>(), "update_money_ui", true, updateMoneyText);
+    }
+
+    private IStateResponse updateMoneyText(GameObject player)
+    {
+        BaseResponse baseResponse = new BaseResponse();
+               
+        var canvas = GetUICanvas();
+        var uiManager = canvas?.GetComponent<UIManager>();
+        if (uiManager)
+            uiManager.updateApple(this.appleNumber);       
+
+        baseResponse.Success = true;
+        return baseResponse;
+    }
+
+    private IStateResponse updateAppleText(GameObject player)
+    {
+        BaseResponse baseResponse = new BaseResponse();
+
+        var canvas = GetUICanvas();
+        var uiManager = canvas?.GetComponent<UIManager>();
+        if (uiManager)
+            uiManager.updateApple(this.appleNumber);
+
+        baseResponse.Success = true;
+        return baseResponse;
+    }
+
+    private Canvas GetUICanvas()
+    {
+        var canvas = GameObject.FindObjectOfType<Canvas>();
+
+        if (!canvas)
+            return null;
+
+        return canvas;
     }
 }

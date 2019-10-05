@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 25c5b621fdcc15b4dbc6c3374dc8d809
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - appleState1: {fileID: 21300000, guid: 3c4474c56677ebe4db2548eb887316c1, type: 3}
+  - appleState2: {fileID: 21300000, guid: ef0bd430f65fc1b4a9b1c820573d0af5, type: 3}
+  - appleState3: {fileID: 21300000, guid: 680166374844dda4292c0573544ec9bd, type: 3}
+  - appleState4: {fileID: 21300000, guid: a31c6785b27a187438e31a8d8f090a29, type: 3}
+  - appleState5: {fileID: 21300000, guid: 318953ffcb5fa36439445a2c466e507e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -16,11 +16,12 @@ public class Market : MonoBehaviour
 
     private IStateResponse SellApples(GameObject player)
     {
-        var inventory = player.GetComponent<Inventory>();
         IStateResponse response = new MarketResponse();
-        int appleNumber = inventory.appleNumber;
-        inventory.appleNumber = 0;
-        inventory.money += appleNumber * ApplePrice;
+
+        var inventory = player.GetComponent<Inventory>();
+        if(inventory)
+            inventory.SellApples(ApplePrice);
+
         response.Success = true;
         return response;
     }
