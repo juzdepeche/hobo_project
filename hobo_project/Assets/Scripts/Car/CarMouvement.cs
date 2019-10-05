@@ -36,7 +36,7 @@ public class CarMouvement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && !hasToStop)
         {
             GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "player_death", true, KillPlayer);
         }
@@ -46,8 +46,17 @@ public class CarMouvement : MonoBehaviour
     {
         BaseResponse response = new BaseResponse();
         player.GetComponent<PlayerController>().Die();
-        response.Success = true;
         GameController.Instance.NotifyPlayerState(player.GetComponent<PlayerController>(), "player_death", false, null);
+        player.transform.position = GameController.Instance.DeadzonePoint.position;
+        StartCoroutine(ReviveCharacter(player));
+        response.Success = true;
         return response;
+    }
+
+    private IEnumerator ReviveCharacter(GameObject player)
+    {
+        yield return new WaitForSeconds(1f);
+        player.transform.position = GameController.Instance.GetRandomSpawnPoint();
+        player.SetActive(true);
     }
 }

@@ -18,6 +18,17 @@ public class GameObjectFactory : MonoBehaviour
 
     public void SpawnApple(Transform transform)
     {
-        Instantiate(Apple, transform.position, Quaternion.identity);
+        var apple = Instantiate(Apple, transform.position, transform.rotation);
+
+        float scaler = UnityEngine.Random.Range(0.8f, 1f);
+        apple.transform.localScale = new Vector3(scaler, scaler, scaler);
+
+        var appleRb = apple.GetComponent<Rigidbody>();
+        appleRb.velocity = new Vector3(appleRb.velocity.x + getOffSetForce(), appleRb.velocity.y + getOffSetForce(), appleRb.velocity.z + getOffSetForce());
+    }
+
+    private float getOffSetForce()
+    {
+        return UnityEngine.Random.Range(-1f, 1f);
     }
 }
