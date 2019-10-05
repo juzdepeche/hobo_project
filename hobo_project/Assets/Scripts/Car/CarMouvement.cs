@@ -36,7 +36,7 @@ public class CarMouvement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && !hasToStop)
         {
             GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "player_death", true, KillPlayer);
         }
