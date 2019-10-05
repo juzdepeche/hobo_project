@@ -30,7 +30,6 @@ public class StreetFlowManager : MonoBehaviour
 
     private IEnumerator ChangeStreetFlow()
     {
-        Debug.Log("ChangeStreetFlow");
         var carManagers = GameObject.FindObjectsOfType<CarManager>();
         var carManagersStreet1 = carManagers.Where(c => c.id == StreetMatchingId[0][0] || c.id == StreetMatchingId[0][1]);
         var carManagersStreet2 = carManagers.Where(c => c.id == StreetMatchingId[1][0] || c.id == StreetMatchingId[1][1]);

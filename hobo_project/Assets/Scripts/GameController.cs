@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
     private List<GameObject> Players;
     private Dictionary<string, State> PlayerState;
+    public Transform[] SpawnPoints;
+    public Transform DeadzonePoint;
 
     private void Awake()
     {
@@ -88,5 +90,11 @@ public class GameController : MonoBehaviour
     private string GetGUIDFromPlayerState(string state)
     {
         return state.Split('_')[0];
+    }
+
+    public Vector3 GetRandomSpawnPoint()
+    {
+        int spawnPointIndex = UnityEngine.Random.Range(0, Instance.SpawnPoints.Length);
+        return Instance.SpawnPoints[spawnPointIndex].position;
     }
 }

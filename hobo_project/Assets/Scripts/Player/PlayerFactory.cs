@@ -13,9 +13,7 @@ public class PlayerFactory : MonoBehaviour
 
     public GameObject SpawnPlayer(Player player)
     {
-        Vector2 target = new Vector2(0, 0);
-
-        GameObject character = Instantiate(Character, target, Quaternion.identity);
+        GameObject character = Instantiate(Character, GameController.Instance.GetRandomSpawnPoint(), Quaternion.identity);
         character.GetComponent<PlayerController>().SetPlayerDevice(player);
         return character;
     }

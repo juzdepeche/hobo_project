@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         for(var i =0; i < inventory.appleNumber; i++)
         {
             GameObjectFactory.Instance.SpawnApple(gameObject.transform);
