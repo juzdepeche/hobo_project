@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(xMoveInput * speed, rb.velocity.y, yMoveInput * speed);
         rb.velocity = movement;
-        if (movement != Vector3.zero) transform.rotation = Quaternion.LookRotation(movement);
+        if (movement != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
     }
 
     public void SetPlayerDevice(Player player)
