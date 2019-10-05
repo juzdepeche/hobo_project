@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
         var canvas = GetUICanvas();
         var uiManager = canvas?.GetComponent<UIManager>();
         if (uiManager)
-            uiManager.updateMoney(this.money);       
+            uiManager.updateMoney(this.money, player.GetComponent<PlayerController>().GetPlayerIndex());       
 
         baseResponse.Success = true;
         return baseResponse;
@@ -55,7 +55,7 @@ public class Inventory : MonoBehaviour
         var canvas = GetUICanvas();
         var uiManager = canvas?.GetComponent<UIManager>();
         if (uiManager)
-            uiManager.updateApple(this.appleNumber);
+            uiManager.updateApple(this.appleNumber, player.GetComponent<PlayerController>().GetPlayerIndex());
 
         baseResponse.Success = true;
         return baseResponse;

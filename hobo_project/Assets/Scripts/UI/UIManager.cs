@@ -18,14 +18,14 @@ public class UIManager : MonoBehaviour
     public Sprite moneyState4;
     public Sprite moneyState5;
 
-    public void updateApple(int nbApples)
+    public void updateApple(int nbApples, int playerIndex)
     {
-        var nbAppleText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbApplesText");
+        var nbAppleText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbApplesText_" + playerIndex);
 
         if (nbAppleText)
             nbAppleText.text = nbApples.ToString();
 
-        var imageApple = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "applesImage").GetComponent<Image>();
+        var imageApple = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "applesImage_" + playerIndex).GetComponent<Image>();
 
         if(imageApple)
         {
@@ -52,14 +52,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void updateMoney(int nbMoney)
+    public void updateMoney(int nbMoney, int playerIndex)
     {
-        var nbMoneyText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbMoneyText");
+        var nbMoneyText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbMoneyText_" + playerIndex);
 
         if (nbMoneyText)
             nbMoneyText.text = nbMoney.ToString();
 
-        var imageMoney = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "moneyImage").GetComponent<Image>();
+        var imageMoney = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "moneyImage_" + playerIndex).GetComponent<Image>();
 
         if (imageMoney)
         {

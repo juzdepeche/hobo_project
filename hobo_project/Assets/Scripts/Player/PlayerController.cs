@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
         return player.Device;
     }
 
+    public int GetPlayerIndex()
+    {
+        return player.PlayerIndex;
+    }
+
     private string GetPlayerGUID()
     {
         return player.Device.GUID.ToString();
