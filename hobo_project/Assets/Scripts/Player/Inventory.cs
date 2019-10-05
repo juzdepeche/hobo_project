@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
         var canvas = GetUICanvas();
         var uiManager = canvas?.GetComponent<UIManager>();
         if (uiManager)
-            uiManager.updateApple(this.appleNumber);       
+            uiManager.updateMoney(this.money);       
 
         baseResponse.Success = true;
         return baseResponse;

@@ -68,11 +68,12 @@ public class GameController : MonoBehaviour
 
     private void NavigateState(string guid)
     {
-        foreach (KeyValuePair<string, State> state in PlayerState)
+        List<string> keys = new List<string>(PlayerState.Keys);
+        foreach (string key in keys)
         {
-            if(state.Key.Contains(guid) && state.Value.Activated)
+            if (key.Contains(guid) && PlayerState[key].Activated)
             {
-                state.Value.CallbackAction(PlayerManager.GetPlayerGameObjectFromDeviceGUID(Players, guid));
+                PlayerState[key].CallbackAction(PlayerManager.GetPlayerGameObjectFromDeviceGUID(Players, guid));
             }
         }
     }

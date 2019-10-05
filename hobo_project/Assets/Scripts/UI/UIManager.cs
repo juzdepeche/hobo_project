@@ -64,11 +64,37 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void updateMoney(Canvas canvas, int nbMoney)
+    public void updateMoney(int nbMoney)
     {
-        var nbAppleText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbMoneyText");
+        var nbMoneyText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbMoneyText");
 
-        if (nbAppleText)
-            nbAppleText.text = nbMoney.ToString();
+        if (nbMoneyText)
+            nbMoneyText.text = nbMoney.ToString();
+
+        var imageMoney = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "moneyImage").GetComponent<Image>();
+
+        if (imageMoney)
+        {
+            if (nbMoney < 5)
+            {
+                imageMoney.sprite = moneyState1;
+            }
+            else if (nbMoney < 10)
+            {
+                imageMoney.sprite = moneyState2;
+            }
+            else if (nbMoney < 15)
+            {
+                imageMoney.sprite = moneyState3;
+            }
+            else if (nbMoney < 20)
+            {
+                imageMoney.sprite = moneyState4;
+            }
+            else
+            {
+                imageMoney.sprite = moneyState5;
+            }
+        }
     }
 }
