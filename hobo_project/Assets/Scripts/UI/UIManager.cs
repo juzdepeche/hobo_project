@@ -18,18 +18,6 @@ public class UIManager : MonoBehaviour
     public Sprite moneyState4;
     public Sprite moneyState5;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void updateApple(int nbApples)
     {
         var nbAppleText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbApplesText");

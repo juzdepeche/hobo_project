@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class GameController : MonoBehaviour
         WatchState("player_death");
         WatchState("update_apple_ui");
         WatchState("update_money_ui");
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void NotifyPlayerState(PlayerController player, string marketType, bool activate, Func<GameObject, IStateResponse> actionCallback = null)
