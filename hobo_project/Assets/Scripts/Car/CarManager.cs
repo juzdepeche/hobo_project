@@ -9,24 +9,21 @@ public class CarManager : MonoBehaviour
     public Transform carSpawner;
     public Transform carKiller;
 
-    public float spawnInterval = 15.0f;
+    public float spawnInterval = 0.01f;
 
     private float nextSpawn = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //InvokeRepeating("LaunchProjectile", 2.0f, 0.3f);
+        InvokeRepeating("SpawnCar", 1.0f, 0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextSpawn)
-        {
-            nextSpawn += spawnInterval;
-            SpawnCar();
-        }
+
     }
 
     private void SpawnCar()

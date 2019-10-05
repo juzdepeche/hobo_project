@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarMouvement : MonoBehaviour
+public class CarKiller : MonoBehaviour
 {
-    private float speed = 20.0f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +13,14 @@ public class CarMouvement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += (transform.forward * speed) * Time.deltaTime;
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Car")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
