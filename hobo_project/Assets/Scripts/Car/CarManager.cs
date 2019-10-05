@@ -16,7 +16,6 @@ public class CarManager : MonoBehaviour
     public bool isActive = false;
 
     private bool isSpawning = false;
-    private bool isStopping = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,22 +26,21 @@ public class CarManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActive)
+
+    }
+
+    public void Stop(bool isStopping)
+    {
+        isStopping = !isStopping;
+        if (isStopping)
         {
-            if (Input.GetKeyDown("f"))
-            {
-                isStopping = !isStopping;
-                if (isStopping)
-                {
-                    isSpawning = false;
-                    StopCars(true);
-                }
-                else
-                {
-                    isSpawning = true;
-                    StopCars(false);
-                }
-            }
+            isSpawning = false;
+            StopCars(true);
+        }
+        else
+        {
+            isSpawning = true;
+            StopCars(false);
         }
     }
 
@@ -64,8 +62,11 @@ public class CarManager : MonoBehaviour
                 car.askToStop = Stop;
                 if (Stop)
                 {
-                    car.parkingId = parkingId;
-                    parkingId++;
+                    if (car.lastParkingHit != parkingId)
+                    {
+                        car.parkingId = parkingId;
+                        parkingId++;
+                    }
                 }
                 else
                 {

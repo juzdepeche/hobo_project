@@ -27,6 +27,10 @@ public class CarParking : MonoBehaviour
             {
                 car.hasToStop = true;
             }
+            else
+            {
+                car.lastParkingHit = id;
+            }
         }
     }
 }
