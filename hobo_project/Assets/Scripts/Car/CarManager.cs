@@ -17,7 +17,7 @@ public class CarManager : MonoBehaviour
     public Material[] BusMaterials;
 
     public Transform carSpawner;
-    public Transform carKiller;
+    public Transform carRotator;
 
     public bool isActive = false;
 
@@ -60,7 +60,8 @@ public class CarManager : MonoBehaviour
                 lastCarId = 0;
             }
 
-            cars = cars.Where(c => c.spawnId == id && c.needToStop == true).OrderBy(c => c.id).ToArray();
+            cars = cars.Where(c => c.spawnId == id && c.needToStop == true).OrderByDescending(c => c.id).ToArray();
+            cars = cars.Take(3).Reverse().ToArray();
 
             int parkingId = 1;
             foreach (var car in cars)

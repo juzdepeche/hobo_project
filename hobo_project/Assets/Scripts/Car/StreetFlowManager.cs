@@ -36,7 +36,7 @@ public class StreetFlowManager : MonoBehaviour
 
         ChangeFlow(false, carManagersStreet1.ToArray());
         ChangeFlow(false, carManagersStreet2.ToArray());
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.9f);
 
         ChangeFlow(street1Active, carManagersStreet1.ToArray());
         ChangeFlow(!street1Active, carManagersStreet2.ToArray());

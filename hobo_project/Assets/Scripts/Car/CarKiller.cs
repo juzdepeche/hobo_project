@@ -18,20 +18,7 @@ public class CarKiller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Car")
-        {
-            var car = other.GetComponent<CarMouvement>();
-            var managerOfThisKiller = this.gameObject.GetComponentInParent<CarManager>();
-
-            if (car && managerOfThisKiller && managerOfThisKiller.id == car.spawnId)
-            {
-                //Destroy(other.gameObject);
-                // Rotate the cube by converting the angles into a quaternion.
-                Quaternion target = Quaternion.Euler(90, car.transform.rotation.y, car.transform.rotation.z);
-
-                // Dampen towards the target rotation
-                car.transform.Rotate(90, 0, 0);
-            }
-        }
+        if (other.tag == "Car")        
+            Destroy(other.gameObject);                  
     }
 }
