@@ -147,6 +147,8 @@ MonoBehaviour:
   MoneySparkle: {fileID: 7404122920389428981, guid: b379197c2d4456c4c925679e8096215c,
     type: 3}
   MoneySparklePoint: {fileID: 6705939184434288078}
+  DashForce: 20
+  dashDuration: 1
 --- !u!114 &4161576784206960065
 MonoBehaviour:
   m_ObjectHideFlags: 0
