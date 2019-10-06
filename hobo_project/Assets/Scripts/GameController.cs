@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     public Transform DeadzonePoint;
 
     private float timePeriode = 0.0f;
-    private float timeEndGame = 10.0f;
+    private float timeEndGame = 180.0f;
 
     private void Awake()
     {
