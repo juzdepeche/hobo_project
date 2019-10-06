@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2538945549088390954}
   - component: {fileID: 8070640666854753235}
   - component: {fileID: 4162525403514149394}
+  - component: {fileID: 1056790686010490548}
   m_Layer: 0
   m_Name: Tent_01
   m_TagString: Untagged
@@ -40,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7511013387952797455}
-  m_Mesh: {fileID: -919162289748257800, guid: 58fad4c914a7b3a429bab79249efea7a, type: 3}
+  m_Mesh: {fileID: 1187818664019619092, guid: 993e719fbb55d6c49927a4f6f4747416, type: 3}
 --- !u!23 &8070640666854753235
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: 58fad4c914a7b3a429bab79249efea7a, type: 3}
+  - {fileID: 2100000, guid: 4868ccb0dae5a3c4290735fa1357625e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,3 +94,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: -919162289748257800, guid: 58fad4c914a7b3a429bab79249efea7a, type: 3}
+--- !u!114 &1056790686010490548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7511013387952797455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be09da2f2b746f4989754a92d2607c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skin1: {fileID: 2100000, guid: 4868ccb0dae5a3c4290735fa1357625e, type: 2}
+  Skin2: {fileID: 2100000, guid: 0a2e1cec23943c341ad812eb4c0599f2, type: 2}
