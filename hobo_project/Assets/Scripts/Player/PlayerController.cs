@@ -19,12 +19,14 @@ public class PlayerController : MonoBehaviour
     public float DashForce;
     public float dashDuration = 0.6f;
     public bool canMove = true;
-
+    public bool canBeShank = true;
+    public Behaviour shankHalo;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
+        shankHalo.enabled = false;
     }
 
     // Update is called once per frame
@@ -103,9 +105,14 @@ public class PlayerController : MonoBehaviour
 
     public void Shank()
     {
-        canMove = false;
-        transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
-        StartCoroutine(Revive());
+        if (canBeShank)
+        {
+            shankHalo.enabled = true;
+            canMove = false;
+            canBeShank = false;
+            transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
+            StartCoroutine(Revive());
+        }
     }
 
     private IEnumerator Revive()
@@ -113,5 +120,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         canMove = true;
+        StartCoroutine(SetCanBeShank(true));
+    }
+
+    private IEnumerator SetCanBeShank(bool can)
+    {
+        yield return new WaitForSeconds(2f);
+        canBeShank = can;
+        shankHalo.enabled = false;
     }
 }

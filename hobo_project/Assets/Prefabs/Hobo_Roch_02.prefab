@@ -151,6 +151,8 @@ MonoBehaviour:
   DashForce: 20
   dashDuration: 1
   canMove: 1
+  canBeShank: 1
+  shankHalo: {fileID: 1751875420664888208}
 --- !u!114 &4161576784206960065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +192,7 @@ GameObject:
   - component: {fileID: 7859387951829524192}
   - component: {fileID: 4087161240691899470}
   - component: {fileID: 337012625237865059}
+  - component: {fileID: 1751875420664888208}
   m_Layer: 0
   m_Name: Shank
   m_TagString: Untagged
@@ -237,3 +240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a498466e76079924a917bc5dbf5ceccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!122 &1751875420664888208
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7016808725274195536}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190335
+  m_Size: 0.5
