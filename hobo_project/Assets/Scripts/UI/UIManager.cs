@@ -21,6 +21,12 @@ public class UIManager : MonoBehaviour
     public GameObject inGame;
     public GameObject gameOver;
 
+    public void Start()
+    {
+        inGame.SetActive(true);
+        gameOver.SetActive(false);
+    }
+
     public void updateApple(int nbApples, int playerIndex)
     {
         var nbAppleText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbApplesText_" + playerIndex);
