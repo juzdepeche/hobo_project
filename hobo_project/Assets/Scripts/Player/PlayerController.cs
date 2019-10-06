@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem MoneySparkle;
     public Transform MoneySparklePoint;
     public ParticleSystem DustSteps;
-    public Transform DustStepsPoint;
     public Transform MoneySpawnPoint;
     private float time;
     private float dashInterval = 2f;
@@ -26,10 +25,13 @@ public class PlayerController : MonoBehaviour
     public bool canBeShank = true;
     public bool isShanked = false;
     public Behaviour shankHalo;
+    private Animator Animator;
+    public GameObject Mesh;
 
     // Start is called before the first frame update
     void Start()
     {
+        Animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
         shankHalo.enabled = false;
@@ -50,6 +52,8 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             rb.velocity = movement;
+            if (movement != Vector3.zero) Animator.SetBool("walk", true);
+            else Animator.SetBool("walk", false);
         }
         if (movement != Vector3.zero && canMove)
         {
@@ -58,7 +62,8 @@ public class PlayerController : MonoBehaviour
 
         if (player.Device.Action1.WasPressed && canMove)
         {
-            GameController.Instance.RequestPlayerAction1(GetPlayerGUID());
+            Animator.SetTrigger("attack");
+            StartCoroutine(Attack());
         }
         else if (player.Device.RightBumper.WasPressed && canMove)
         {
@@ -167,5 +172,11 @@ public class PlayerController : MonoBehaviour
     private void SetRigidBodyConstraitForDash()
     {
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
+    }
+
+    private IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(0.7f);
+        GameController.Instance.RequestPlayerAction1(GetPlayerGUID());
     }
 }

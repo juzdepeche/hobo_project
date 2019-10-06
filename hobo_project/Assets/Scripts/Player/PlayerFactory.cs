@@ -17,8 +17,10 @@ public class PlayerFactory : MonoBehaviour
     public GameObject SpawnPlayer(Player player)
     {
         GameObject character = Instantiate(Character, GameController.Instance.GetRandomSpawnPoint(), Quaternion.identity);
-        character.GetComponent<PlayerController>().SetPlayerDevice(player);
-        character.GetComponent<Renderer>().material = player.PlayerIndex == 0 ? Player1Skin : Player2Skin;
+
+        var ctrl = character.GetComponent<PlayerController>();
+        ctrl.SetPlayerDevice(player);
+        ctrl.Mesh.GetComponent<Renderer>().material = player.PlayerIndex == 0 ? Player1Skin : Player2Skin;
         return character;
     }
 }
