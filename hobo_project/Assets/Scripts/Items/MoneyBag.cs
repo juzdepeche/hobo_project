@@ -22,6 +22,7 @@ public class MoneyBag : MonoBehaviour
         if (other.collider.tag.Contains("Player") && other.collider.GetComponent<Inventory>() && !other.collider.GetComponent<PlayerController>().isShanked)
         {
             other.gameObject.GetComponent<Inventory>().AddMoney(value);
+            other.gameObject.GetComponent<PlayerController>().SparkMoney();
             DestroyMoneyBag();
         }
     }
