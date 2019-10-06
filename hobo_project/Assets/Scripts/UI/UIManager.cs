@@ -85,4 +85,20 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    public void updateTimer(float time, float maxTime)
+    {
+        var timerText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "timerText");
+        if (timerText)
+        {
+            float remaningTime = (maxTime - time);
+            string minutes = "0" + ((int)remaningTime / 60).ToString();
+            string seconds = (remaningTime % 60).ToString("f0"); // Only two decimals
+
+            if (seconds.Length == 1)
+                seconds = "0" + seconds;
+
+            timerText.text = minutes + " : " + seconds;
+        }
+    }
 }

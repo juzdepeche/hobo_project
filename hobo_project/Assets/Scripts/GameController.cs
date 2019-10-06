@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     public Transform DeadzonePoint;
 
     private float timePeriode = 0.0f;
-    private float timeEndGame = 180.0f;
+    private float timeEndGame = 10.0f;
 
     private void Awake()
     {
@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
         }
 
         timePeriode += Time.deltaTime;
+        updateTimerText(timePeriode, timeEndGame);
         if (timePeriode >= timeEndGame)
         {
             SceneManager.LoadScene(2);
@@ -114,5 +115,23 @@ public class GameController : MonoBehaviour
     {
         int spawnPointIndex = UnityEngine.Random.Range(0, Instance.SpawnPoints.Length);
         return Instance.SpawnPoints[spawnPointIndex].position;
+    }
+
+    private Canvas GetUICanvas()
+    {
+        var canvas = GameObject.FindObjectOfType<Canvas>();
+
+        if (!canvas)
+            return null;
+
+        return canvas;
+    }
+
+    private void updateTimerText(float time, float maxTime)
+    {
+        var canvas = GetUICanvas();
+        var uiManager = canvas?.GetComponent<UIManager>();        
+        if (uiManager)
+            uiManager.updateTimer(time, maxTime);       
     }
 }
