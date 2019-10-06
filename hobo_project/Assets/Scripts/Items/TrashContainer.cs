@@ -15,7 +15,15 @@ public class TrashContainer : MonoBehaviour
     {
         if (other.tag == "Player" && activated)
         {
-            GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "trash_container", true, ThrowRandomReward);
+            GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "trash_container_" + this.name, true, ThrowRandomReward);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "trash_container_" + this.name, false, ThrowRandomReward);
         }
     }
 
