@@ -29,9 +29,17 @@ public class Inventory : MonoBehaviour
 
     public void SellApples(int applePrice)
     {
-        int appleNumber = this.appleNumber;
-        this.appleNumber = 0;
-        this.money += appleNumber * applePrice;
+        int appleNumberTemp = appleNumber;
+        appleNumber = 0;
+        int moneyMade = appleNumberTemp * applePrice;
+        money += moneyMade;
+
+        PlayerController ctrl = gameObject.GetComponent<PlayerController>();
+        if (ctrl && moneyMade > 0)
+        {
+            ctrl.SparkMoney();
+        }
+
         GameController.Instance.NotifyPlayerState(gameObject.GetComponent<PlayerController>(), "update_money_ui", true, updateMoneyText);
     }
 
@@ -54,6 +62,7 @@ public class Inventory : MonoBehaviour
 
         var canvas = GetUICanvas();
         var uiManager = canvas?.GetComponent<UIManager>();
+
         if (uiManager)
             uiManager.updateApple(this.appleNumber, player.GetComponent<PlayerController>().GetPlayerIndex());
 

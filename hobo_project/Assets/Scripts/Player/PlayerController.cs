@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 10f;
     private Rigidbody rb;
     private Inventory inventory;
+    public ParticleSystem MoneySparkle;
+    public Transform MoneySparklePoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,11 @@ public class PlayerController : MonoBehaviour
         return player.Device.GUID.ToString();
     }
 
+    public void SparkMoney()
+    {
+        Instantiate(MoneySparkle, MoneySparklePoint.position, Quaternion.identity);
+    }
+
     public void Die()
     {
         gameObject.SetActive(false);
@@ -65,6 +72,5 @@ public class PlayerController : MonoBehaviour
             GameObjectFactory.Instance.SpawnApple(gameObject.transform);
         }
         inventory.appleNumber = 0;
-        inventory.money = 0;
     }
 }
