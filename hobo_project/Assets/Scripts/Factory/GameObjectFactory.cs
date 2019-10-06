@@ -7,6 +7,7 @@ public class GameObjectFactory : MonoBehaviour
     public static GameObjectFactory Instance;
 
     public GameObject Apple;
+    public GameObject MoneyBag;
 
     private void Awake()
     {
@@ -27,8 +28,20 @@ public class GameObjectFactory : MonoBehaviour
         appleRb.velocity = new Vector3(appleRb.velocity.x + getOffSetForce(), appleRb.velocity.y + getOffSetForce(), appleRb.velocity.z + getOffSetForce());
     }
 
-    private float getOffSetForce()
+    public void SpawnMoneyBag(Transform transform, int moneyAmount)
     {
-        return UnityEngine.Random.Range(-1f, 1f);
+        if (moneyAmount <= 0) return;
+        var moneyBag = Instantiate(MoneyBag, transform.position, transform.rotation);
+
+        var moneyBagRb = moneyBag.GetComponent<Rigidbody>();
+        moneyBagRb.AddForce(new Vector3(getOffSetForce(-5f, 5f), 10f, getOffSetForce(-5f, 5f)), ForceMode.VelocityChange);
+
+        var moneyBagCtrl = moneyBag.GetComponent<MoneyBag>();
+        moneyBagCtrl.value = moneyAmount;
+    }
+
+    private float getOffSetForce(float x1 = -1f, float x2 = 1f)
+    {
+        return UnityEngine.Random.Range(x1, x2);
     }
 }

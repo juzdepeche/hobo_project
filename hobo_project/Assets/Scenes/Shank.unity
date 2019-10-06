@@ -994,7 +994,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313298264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6175003, y: 5.2848716, z: -18.055}
+  m_LocalPosition: {x: -1.6175003, y: 4.62, z: -18.055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 566227046}
@@ -2739,6 +2739,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Apple: {fileID: 8098914359033232663, guid: 4b4bc89cc9c38724e84affc41ecb0fc9, type: 3}
+  MoneyBag: {fileID: 1171538529512849352, guid: db52e06bffd70aa47ac248088faed9ab,
+    type: 3}
 --- !u!114 &1045555598
 MonoBehaviour:
   m_ObjectHideFlags: 0

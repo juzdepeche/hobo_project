@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
     private Inventory inventory;
     public ParticleSystem MoneySparkle;
     public Transform MoneySparklePoint;
+    public Transform MoneySpawnPoint;
     private float time;
     private float dashInterval = 2f;
     public float DashForce;
-    public float dashDuration = 0.6f;
+    public float dashDuration = 0.2f;
     public bool canMove = true;
     public bool canBeShank = true;
+    public bool isShanked = false;
     public Behaviour shankHalo;
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,11 @@ public class PlayerController : MonoBehaviour
                 time = 0;
                 StartCoroutine(Dash());
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Shank();
         }
     }
 
@@ -97,9 +104,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 force = transform.forward + new Vector3(rb.velocity.x, 0.05f, rb.velocity.z);
         rb.AddForce(force * DashForce, ForceMode.VelocityChange);
-
         yield return new WaitForSeconds(dashDuration);
-
         rb.velocity = Vector3.zero;
     }
 
@@ -108,9 +113,12 @@ public class PlayerController : MonoBehaviour
         if (canBeShank)
         {
             shankHalo.enabled = true;
+            isShanked = true;
             canMove = false;
             canBeShank = false;
             transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
+            GameObjectFactory.Instance.SpawnMoneyBag(MoneySpawnPoint, inventory.money == 1 ? 1 : inventory.money / 2);
+            inventory.money = inventory.money == 1 ? 1 : inventory.money / 2;
             StartCoroutine(Revive());
         }
     }
@@ -120,6 +128,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         canMove = true;
+        isShanked = false;
         StartCoroutine(SetCanBeShank(true));
     }
 
@@ -128,5 +137,15 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         canBeShank = can;
         shankHalo.enabled = false;
+    }
+
+    private void SetBasicRigidBodyConstrait()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+    }
+
+    private void SetRigidBodyConstraitForDash()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
     }
 }

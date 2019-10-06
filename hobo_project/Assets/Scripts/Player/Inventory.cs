@@ -8,23 +8,19 @@ public class Inventory : MonoBehaviour
 {
     public int appleNumber = 0;
     public int money = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log(money);
-    }
 
     public void AddApple(int appleNumber)
     {
         this.appleNumber += appleNumber;
 
         GameController.Instance.NotifyPlayerState(gameObject.GetComponent<PlayerController>(), "update_apple_ui", true, updateAppleText);
+    }
+
+    public void AddMoney(int moneyAMount)
+    {
+        money += moneyAMount;
+
+        GameController.Instance.NotifyPlayerState(gameObject.GetComponent<PlayerController>(), "update_money_ui", true, updateMoneyText);
     }
 
     public void SellApples(int applePrice)
@@ -50,7 +46,7 @@ public class Inventory : MonoBehaviour
         var canvas = GetUICanvas();
         var uiManager = canvas?.GetComponent<UIManager>();
         if (uiManager)
-            uiManager.updateMoney(this.money, player.GetComponent<PlayerController>().GetPlayerIndex());       
+            uiManager.updateMoney(money, player.GetComponent<PlayerController>().GetPlayerIndex());       
 
         baseResponse.Success = true;
         return baseResponse;
@@ -64,7 +60,7 @@ public class Inventory : MonoBehaviour
         var uiManager = canvas?.GetComponent<UIManager>();
 
         if (uiManager)
-            uiManager.updateApple(this.appleNumber, player.GetComponent<PlayerController>().GetPlayerIndex());
+            uiManager.updateApple(appleNumber, player.GetComponent<PlayerController>().GetPlayerIndex());
 
         baseResponse.Success = true;
         return baseResponse;
