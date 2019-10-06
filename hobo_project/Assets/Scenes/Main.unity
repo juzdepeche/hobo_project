@@ -2997,7 +2997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773232db29bbb74459b0f87d6206cbae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 5395603857955114294, guid: 675cbc07751533d4fa6c1146e8d9c4f0,
+  Character: {fileID: 6605485348639897327, guid: 0c8991ec406c48a4486a57c887b09c5a,
     type: 3}
   Player1Skin: {fileID: 2100000, guid: 2108094fdb18e9647bb273a5eb7c4e3f, type: 2}
   Player2Skin: {fileID: 2100000, guid: 94ec8629e9f805c44a605764200bfa3f, type: 2}
