@@ -8,7 +8,9 @@ public class CarManager : MonoBehaviour
     public int id = 0;
     public int lastCarId = 1;
 
-    public GameObject myPrefab;
+    public GameObject Car;
+    public GameObject Pickup;
+    public GameObject Bus;
 
     public Transform carSpawner;
     public Transform carKiller;
@@ -81,7 +83,7 @@ public class CarManager : MonoBehaviour
     {
         if (isSpawning)
         {
-            GameObject car = Instantiate(myPrefab, carSpawner.position, carSpawner.rotation) as GameObject;
+            GameObject car = Instantiate(GetRandomVehicule(), carSpawner.position, carSpawner.rotation) as GameObject;
             CarMouvement carMouvement = car.GetComponent<CarMouvement>();
 
             if (carMouvement)
@@ -93,6 +95,29 @@ public class CarManager : MonoBehaviour
                 lastCarId++;
             }
         }
+    }
+
+    private GameObject GetRandomVehicule()
+    {
+        var choosenVehiculeIndex = Random.Range(0, 3);
+
+        switch (choosenVehiculeIndex)
+        {
+            //car
+            case 0:
+
+                break;
+            //pickup
+            case 1:
+
+                break;
+            //bus
+            case 2:
+
+                break;
+        }
+
+        return choosenVehicule;
     }
 }
 

@@ -190,7 +190,7 @@ MonoBehaviour:
   - {fileID: 393903482937969106}
   - {fileID: 8551859490174253040}
   - {fileID: 4824504690866814350}
-  minIntervalSpawn: 3
+  minIntervalSpawn: 4
   maxIntervalSpawn: 15
 --- !u!65 &5905624462654547148
 BoxCollider:
