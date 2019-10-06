@@ -1,4 +1,5 @@
 ﻿using InControl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private float dashInterval = 2f;
     public float DashForce;
     public float dashDuration = 0.6f;
+    public bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,14 +39,14 @@ public class PlayerController : MonoBehaviour
         //adapt to camera angle 
         movement = Quaternion.AngleAxis(-45, Vector3.up) * movement;
 
-        rb.velocity = movement;
-        if (movement != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
+        if (canMove) rb.velocity = movement;
+        if (movement != Vector3.zero && canMove) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
 
-        if (player.Device.Action1.WasPressed)
+        if (player.Device.Action1.WasPressed && canMove)
         {
             GameController.Instance.RequestPlayerAction1(GetPlayerGUID());
         }
-        else if (player.Device.RightBumper.WasPressed)
+        else if (player.Device.RightBumper.WasPressed && canMove)
         {
             if(time > dashInterval)
             {
@@ -96,5 +99,19 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         rb.velocity = Vector3.zero;
+    }
+
+    public void Shank()
+    {
+        canMove = false;
+        transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
+        StartCoroutine(Revive());
+    }
+
+    private IEnumerator Revive()
+    {
+        yield return new WaitForSeconds(3f);
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+        canMove = true;
     }
 }
