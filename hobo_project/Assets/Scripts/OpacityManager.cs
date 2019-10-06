@@ -6,6 +6,8 @@ public class OpacityManager : MonoBehaviour
 {
     public GameObject building;
 
+    public Shader shader;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +25,8 @@ public class OpacityManager : MonoBehaviour
         if (other.tag == "Player")
         {            
             var mesh = building.GetComponent<MeshRenderer>();
-            if (mesh)
-                mesh.material.color = new Color(1.0f, 1.0f, 1.0f, 0.5f); ;
+            if (mesh)            
+                mesh.material.shader = shader;            
         }
     }
 
@@ -34,7 +36,7 @@ public class OpacityManager : MonoBehaviour
         {
             var mesh = building.GetComponent<MeshRenderer>();
             if (mesh)
-                mesh.material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                mesh.material.shader = Shader.Find("Standard"); 
         }
     }
 }
