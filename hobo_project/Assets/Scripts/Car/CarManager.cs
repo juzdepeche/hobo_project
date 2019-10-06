@@ -61,7 +61,7 @@ public class CarManager : MonoBehaviour
             }
 
             cars = cars.Where(c => c.spawnId == id && c.needToStop == true).OrderByDescending(c => c.id).ToArray();
-            cars = cars.Take(3).Reverse().ToArray();
+            cars = cars.Take(4).Reverse().ToArray();
 
             int parkingId = 1;
             foreach (var car in cars)

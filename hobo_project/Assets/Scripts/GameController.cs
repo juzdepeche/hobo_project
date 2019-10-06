@@ -51,14 +51,14 @@ public class GameController : MonoBehaviour
                 var uiManager = canvas?.GetComponent<UIManager>();
                 if (uiManager)
                 {
+                    int moneyPlayer1 = 0;
+                    int moneyPlayer2 = 0;
                     if (Players.Any())
                     {
-                        int moneyPlayer1 = 0;
                         var inv = Players[0].GetComponent<Inventory>();
                         if (inv)
                             moneyPlayer1 = inv.money;
 
-                        int moneyPlayer2 = 0;
                         if (Players.Count > 1)
                         {
                             inv = Players[1].GetComponent<Inventory>();
@@ -66,8 +66,8 @@ public class GameController : MonoBehaviour
                                 moneyPlayer2 = inv.money;
                         }
 
-                        uiManager.showGameOver(moneyPlayer1, moneyPlayer2);
                     }
+                    uiManager.showGameOver(moneyPlayer1, moneyPlayer2);
                 }
             }
         }
