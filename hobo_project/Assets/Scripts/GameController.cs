@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameController : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class GameController : MonoBehaviour
     public Transform[] SpawnPoints;
     public Transform DeadzonePoint;
 
+    private bool isGameOver = false;
     private float timePeriode = 0.0f;
     private float timeEndGame = 180.0f;
+    private float timeRestartToMenu = 5.0f;
 
     private void Awake()
     {
@@ -36,11 +39,45 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
-        timePeriode += Time.deltaTime;
-        updateTimerText(timePeriode, timeEndGame);
-        if (timePeriode >= timeEndGame)
+        if (!isGameOver)
         {
-            SceneManager.LoadScene(2);
+            timePeriode += Time.deltaTime;
+            updateTimerText(timePeriode, timeEndGame);
+            if (timePeriode >= timeEndGame)
+            {
+                isGameOver = true;
+                timePeriode = 0.0f;
+                var canvas = GetUICanvas();
+                var uiManager = canvas?.GetComponent<UIManager>();
+                if (uiManager)
+                {
+                    if (Players.Any())
+                    {
+                        int moneyPlayer1 = 0;
+                        var inv = Players[0].GetComponent<Inventory>();
+                        if (inv)
+                            moneyPlayer1 = inv.money;
+
+                        int moneyPlayer2 = 0;
+                        if (Players.Count > 1)
+                        {
+                            inv = Players[1].GetComponent<Inventory>();
+                            if (inv)
+                                moneyPlayer2 = inv.money;
+                        }
+
+                        uiManager.showGameOver(moneyPlayer1, moneyPlayer2);
+                    }
+                }
+            }
+        }
+        else
+        {
+            timePeriode += Time.deltaTime;
+            if (timePeriode >= timeRestartToMenu)
+            {
+                SceneManager.LoadScene(0); //Return to menu
+            }
         }
     }
 
