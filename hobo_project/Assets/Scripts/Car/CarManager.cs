@@ -8,7 +8,13 @@ public class CarManager : MonoBehaviour
     public int id = 0;
     public int lastCarId = 1;
 
-    public GameObject myPrefab;
+    public GameObject Car;
+    public GameObject Pickup;
+    public GameObject Bus;
+
+    public Material[] CarMaterials;
+    public Material[] PickupMaterials;
+    public Material[] BusMaterials;
 
     public Transform carSpawner;
     public Transform carKiller;
@@ -81,7 +87,7 @@ public class CarManager : MonoBehaviour
     {
         if (isSpawning)
         {
-            GameObject car = Instantiate(myPrefab, carSpawner.position, carSpawner.rotation) as GameObject;
+            GameObject car = Instantiate(GetRandomVehicule(), carSpawner.position, carSpawner.rotation) as GameObject;
             CarMouvement carMouvement = car.GetComponent<CarMouvement>();
 
             if (carMouvement)
@@ -93,6 +99,29 @@ public class CarManager : MonoBehaviour
                 lastCarId++;
             }
         }
+    }
+
+    private GameObject GetRandomVehicule()
+    {
+        var choosenVehiculeIndex = Random.Range(0, 3);
+
+        switch (choosenVehiculeIndex)
+        {
+            //car
+            case 0:
+                Car.GetComponent<Renderer>().material = CarMaterials[Random.Range(0, CarMaterials.Length)];
+                return Car;
+            //pickup
+            case 1:
+                Pickup.GetComponent<Renderer>().material = PickupMaterials[Random.Range(0, PickupMaterials.Length)];
+                return Pickup;
+            //bus
+            case 2:
+                Bus.GetComponent<Renderer>().material = BusMaterials[Random.Range(0, BusMaterials.Length)];
+                return Bus;
+        }
+
+        return null;
     }
 }
 

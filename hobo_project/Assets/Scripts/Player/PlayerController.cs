@@ -1,4 +1,5 @@
 ﻿using InControl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,12 @@ public class PlayerController : MonoBehaviour
     private Inventory inventory;
     public ParticleSystem MoneySparkle;
     public Transform MoneySparklePoint;
+    private float time;
+    private float dashInterval = 2f;
+    public float DashForce;
+    public float dashDuration = 0.6f;
+    public bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +30,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time += Time.deltaTime;
+
         xMoveInput = player.Device.LeftStickX; // ?? player.Device.DPadX;
         yMoveInput = player.Device.LeftStickY; // ?? player.Device.DPadY;
 
@@ -30,12 +39,20 @@ public class PlayerController : MonoBehaviour
         //adapt to camera angle 
         movement = Quaternion.AngleAxis(-45, Vector3.up) * movement;
 
-        rb.velocity = movement;
-        if (movement != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
+        if (canMove) rb.velocity = movement;
+        if (movement != Vector3.zero && canMove) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
 
-        if (player.Device.Action1.WasPressed)
+        if (player.Device.Action1.WasPressed && canMove)
         {
             GameController.Instance.RequestPlayerAction1(GetPlayerGUID());
+        }
+        else if (player.Device.RightBumper.WasPressed && canMove)
+        {
+            if(time > dashInterval)
+            {
+                time = 0;
+                StartCoroutine(Dash());
+            }
         }
     }
 
@@ -72,5 +89,29 @@ public class PlayerController : MonoBehaviour
             GameObjectFactory.Instance.SpawnApple(gameObject.transform);
         }
         inventory.appleNumber = 0;
+    }
+
+    private IEnumerator Dash()
+    {
+        Vector3 force = transform.forward + new Vector3(rb.velocity.x, 0.05f, rb.velocity.z);
+        rb.AddForce(force * DashForce, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.velocity = Vector3.zero;
+    }
+
+    public void Shank()
+    {
+        canMove = false;
+        transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
+        StartCoroutine(Revive());
+    }
+
+    private IEnumerator Revive()
+    {
+        yield return new WaitForSeconds(3f);
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+        canMove = true;
     }
 }
