@@ -13,12 +13,20 @@ public class Inventory : MonoBehaviour
     {
         this.appleNumber += appleNumber;
 
+        var audio = gameObject.GetComponentsInParent<AudioSource>().FirstOrDefault(a => a.clip.name.Contains("pickup"));        
+        if (audio)
+            audio.Play();
+            
         GameController.Instance.NotifyPlayerState(gameObject.GetComponent<PlayerController>(), "update_apple_ui", true, updateAppleText);
     }
 
     public void AddMoney(int moneyAMount)
     {
         money += moneyAMount;
+
+        var audio = gameObject.GetComponentsInParent<AudioSource>().FirstOrDefault(a => a.clip.name.Contains("sell"));
+        if (audio)
+            audio.Play();
 
         GameController.Instance.NotifyPlayerState(gameObject.GetComponent<PlayerController>(), "update_money_ui", true, updateMoneyText);
     }

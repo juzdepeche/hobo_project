@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -102,7 +103,7 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         gameObject.SetActive(false);
-        for(var i =0; i < inventory.appleNumber; i++)
+        for (var i =0; i < inventory.appleNumber; i++)
         {
             GameObjectFactory.Instance.SpawnApple(gameObject.transform);
         }
@@ -111,6 +112,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        var audio = gameObject.GetComponents<AudioSource>().FirstOrDefault(a => a.clip.name.Contains("run"));
+        if (audio)
+            audio.Play();
+
         Vector3 force = transform.forward + new Vector3(rb.velocity.x, 0.05f, rb.velocity.z);
         rb.AddForce(force * DashForce, ForceMode.VelocityChange);
         DustSteps.Play();
@@ -123,6 +128,10 @@ public class PlayerController : MonoBehaviour
     {
         if (canBeShank)
         {
+            var audio = gameObject.GetComponentsInParent<AudioSource>().FirstOrDefault(a => a.clip.name.Contains("carhit"));
+            if (audio)
+                audio.Play();
+
             shankHalo.enabled = true;
             isShanked = true;
             canMove = false;

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Car
+  - carSoundManager
   layers:
   - Default
   - TransparentFX

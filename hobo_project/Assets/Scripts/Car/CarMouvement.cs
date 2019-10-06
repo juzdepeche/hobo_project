@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CarMouvement : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class CarMouvement : MonoBehaviour
     public int spawnId = 0;
     public int lastParkingHit = 0;
     public int parkingId = 0;
-    
+
     // Is change when the car pass trough the stop line.
     public bool needToStop = true;
     // The manager as the car to stop at the next oportunity.
@@ -43,7 +44,8 @@ public class CarMouvement : MonoBehaviour
     {
         if(other.tag == "Player" && !hasToStop)
         {
-            GameController.Instance.NotifyPlayerState(other.gameObject.GetComponent<PlayerController>(), "player_death", true, KillPlayer);
+            var player = other.gameObject.GetComponent<PlayerController>();
+            GameController.Instance.NotifyPlayerState(player, "player_death", true, KillPlayer);
         }
     }
 
