@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
 
     private bool isGameOver = false;
     private float timePeriode = 0.0f;
-    private float timeEndGame = 10.0f;
+    private float timeEndGame = 180.0f;
     private float timeRestartToMenu = 5.0f;
 
     private void Awake()
