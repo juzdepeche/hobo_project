@@ -18,9 +18,7 @@ public class CarKiller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Car")
-        {
-            Destroy(other.gameObject);
-        }
+        if (other.tag == "Car")        
+            Destroy(other.gameObject);                  
     }
 }

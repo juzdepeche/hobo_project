@@ -18,8 +18,6 @@ public class UIManager : MonoBehaviour
     public Sprite moneyState4;
     public Sprite moneyState5;
 
-    private bool gameOverVisible = false;
-
     public GameObject inGame;
     public GameObject gameOver;
 
