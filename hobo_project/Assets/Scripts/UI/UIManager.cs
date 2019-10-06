@@ -18,6 +18,11 @@ public class UIManager : MonoBehaviour
     public Sprite moneyState4;
     public Sprite moneyState5;
 
+    private bool gameOverVisible = false;
+
+    public GameObject inGame;
+    public GameObject gameOver;
+
     public void updateApple(int nbApples, int playerIndex)
     {
         var nbAppleText = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "nbApplesText_" + playerIndex);
@@ -25,7 +30,7 @@ public class UIManager : MonoBehaviour
         if (nbAppleText)
             nbAppleText.text = nbApples.ToString();
 
-        var imageApple = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "applesImage_" + playerIndex).GetComponent<Image>();
+        var imageApple = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "applesImage_" + playerIndex)?.GetComponent<Image>();
 
         if(imageApple)
         {
@@ -59,7 +64,7 @@ public class UIManager : MonoBehaviour
         if (nbMoneyText)
             nbMoneyText.text = nbMoney.ToString();
 
-        var imageMoney = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "moneyImage_" + playerIndex).GetComponent<Image>();
+        var imageMoney = gameObject.GetComponentsInChildren<Image>().FirstOrDefault(t => t.name == "moneyImage_" + playerIndex)?.GetComponent<Image>();
 
         if (imageMoney)
         {
@@ -92,13 +97,32 @@ public class UIManager : MonoBehaviour
         if (timerText)
         {
             float remaningTime = (maxTime - time);
-            string minutes = "0" + ((int)remaningTime / 60).ToString();
-            string seconds = (remaningTime % 60).ToString("f0"); // Only two decimals
 
-            if (seconds.Length == 1)
-                seconds = "0" + seconds;
+            if (remaningTime > 0.0f)
+            {
+                string minutes = "0" + ((int)remaningTime / 60).ToString();
+                string seconds = (remaningTime % 60).ToString("f0"); // Only two decimals
 
-            timerText.text = minutes + " : " + seconds;
+                if (seconds.Length == 1)
+                    seconds = "0" + seconds;
+
+                timerText.text = minutes + " : " + seconds;
+            }
         }
+    }
+
+    public void showGameOver(int moneyPlayer1, int moneyPlayer2)
+    {
+        inGame.SetActive(false);
+        gameOver.SetActive(true);
+
+        var finalMoneyPlayer1 = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "finalMoneyText_1");
+        var finalMoneyPlayer2 = gameObject.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name == "finalMoneyText_2");
+
+        if (finalMoneyPlayer1)
+            finalMoneyPlayer1.text = moneyPlayer1.ToString() + "$";
+
+        if (finalMoneyPlayer2)
+            finalMoneyPlayer2.text = moneyPlayer2.ToString() + "$";
     }
 }
