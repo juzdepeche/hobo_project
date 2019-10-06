@@ -30,7 +30,12 @@ public class CarMouvement : MonoBehaviour
     {
         if (!hasToStop)
         {
+            GetComponent<Collider>().isTrigger = true;
             transform.position += (transform.forward * speed) * Time.deltaTime;
+        }
+        else
+        {
+            GetComponent<Collider>().isTrigger = false;
         }
     }
 
