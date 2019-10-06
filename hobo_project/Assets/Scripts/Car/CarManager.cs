@@ -12,6 +12,10 @@ public class CarManager : MonoBehaviour
     public GameObject Pickup;
     public GameObject Bus;
 
+    public Material[] CarMaterials;
+    public Material[] PickupMaterials;
+    public Material[] BusMaterials;
+
     public Transform carSpawner;
     public Transform carKiller;
 
@@ -105,19 +109,19 @@ public class CarManager : MonoBehaviour
         {
             //car
             case 0:
-
-                break;
+                Car.GetComponent<Renderer>().material = CarMaterials[Random.Range(0, CarMaterials.Length)];
+                return Car;
             //pickup
             case 1:
-
-                break;
+                Pickup.GetComponent<Renderer>().material = PickupMaterials[Random.Range(0, PickupMaterials.Length)];
+                return Pickup;
             //bus
             case 2:
-
-                break;
+                Bus.GetComponent<Renderer>().material = BusMaterials[Random.Range(0, BusMaterials.Length)];
+                return Bus;
         }
 
-        return choosenVehicule;
+        return null;
     }
 }
 
