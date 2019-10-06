@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 7310578925124983151}
   - component: {fileID: 1038466562972283975}
   m_Layer: 0
-  m_Name: Market_01
+  m_Name: Market
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9027661991490760115}
-  m_Mesh: {fileID: -5521517190978003144, guid: 37c14a79e5bcc86468227d94c2fcd2cd, type: 3}
+  m_Mesh: {fileID: 7684625086359004581, guid: 6b7960f9fa977eb4cab1857eca840c8c, type: 3}
 --- !u!23 &7310578925124983151
 MeshRenderer:
   m_ObjectHideFlags: 0

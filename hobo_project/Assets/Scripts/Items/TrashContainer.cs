@@ -10,6 +10,7 @@ public class TrashContainer : MonoBehaviour
     private float time = 0;
     private float reloadInterval = 20f;
     private bool activated = true;
+    public bool negativeForce = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -53,9 +54,13 @@ public class TrashContainer : MonoBehaviour
 
             var randomItem = Items[Random.Range(0, Items.Length)];
 
-            Vector3 throwForce = new Vector3(0f, 5f, 2f);
+            float z = 2.0f;
+            if (negativeForce)
+                z *= -1;
 
-            var newItem = Instantiate(randomItem, SpawnPoint.position, transform.rotation);
+            Vector3 throwForce = new Vector3(0f, 5f, z);
+
+            var newItem = Instantiate(randomItem, SpawnPoint.position, gameObject.transform.rotation);
             newItem.GetComponent<Rigidbody>().velocity += throwForce;
         }
 
