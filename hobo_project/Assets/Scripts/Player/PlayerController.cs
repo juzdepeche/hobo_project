@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private Inventory inventory;
     public ParticleSystem MoneySparkle;
     public Transform MoneySparklePoint;
+    public ParticleSystem DustSteps;
+    public Transform DustStepsPoint;
     public Transform MoneySpawnPoint;
     private float time;
     private float dashInterval = 2f;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public bool canBeShank = true;
     public bool isShanked = false;
     public Behaviour shankHalo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +46,14 @@ public class PlayerController : MonoBehaviour
         //adapt to camera angle 
         movement = Quaternion.AngleAxis(-45, Vector3.up) * movement;
 
-        if (canMove) rb.velocity = movement;
-        if (movement != Vector3.zero && canMove) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
+        if (canMove)
+        {
+            rb.velocity = movement;
+        }
+        if (movement != Vector3.zero && canMove)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15F);
+        }
 
         if (player.Device.Action1.WasPressed && canMove)
         {
@@ -104,7 +113,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 force = transform.forward + new Vector3(rb.velocity.x, 0.05f, rb.velocity.z);
         rb.AddForce(force * DashForce, ForceMode.VelocityChange);
+        DustSteps.Play();
         yield return new WaitForSeconds(dashDuration);
+        DustSteps.Stop();
         rb.velocity = Vector3.zero;
     }
 
