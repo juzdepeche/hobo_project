@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         for (var i =0; i < inventory.appleNumber; i++)
         {
             GameObjectFactory.Instance.SpawnApple(gameObject.transform);
@@ -151,6 +151,11 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Revive()
     {
         yield return new WaitForSeconds(3f);
+        ResetShank();
+    }
+
+    public void ResetShank()
+    {
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         canMove = true;
         isShanked = false;

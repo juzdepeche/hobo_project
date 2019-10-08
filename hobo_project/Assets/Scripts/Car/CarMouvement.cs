@@ -62,8 +62,9 @@ public class CarMouvement : MonoBehaviour
 
     private IEnumerator ReviveCharacter(GameObject player)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
         player.transform.position = GameController.Instance.GetRandomSpawnPoint();
+        player.GetComponent<PlayerController>().ResetShank();
         player.SetActive(true);
     }
 }
