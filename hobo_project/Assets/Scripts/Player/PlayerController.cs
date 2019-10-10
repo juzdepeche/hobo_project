@@ -194,10 +194,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        var audio = gameObject.GetComponents<AudioSource>().FirstOrDefault(a => a.clip.name.Contains("run"));
-        if (audio)
-            audio.Play();
-
+        AudioManager.Instance.Play("Run");
         Vector3 force = transform.forward + new Vector3(rb.velocity.x, 0.05f, rb.velocity.z);
         rb.AddForce(force * DashForce, ForceMode.VelocityChange);
         DustSteps.Play();

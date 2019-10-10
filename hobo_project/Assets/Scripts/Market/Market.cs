@@ -17,7 +17,7 @@ public class Market : MonoBehaviour
     private IStateResponse SellApples(GameObject player)
     {
         IStateResponse response = new MarketResponse();
-
+        AudioManager.Instance.Play("Sell");
         var inventory = player.GetComponent<Inventory>();
         if(inventory)
             inventory.SellApples(ApplePrice);
