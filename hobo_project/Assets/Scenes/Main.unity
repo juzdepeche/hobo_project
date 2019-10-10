@@ -2348,6 +2348,26 @@ MonoBehaviour:
     volume: 0.334
     pitch: 1
     source: {fileID: 0}
+  - name: Pickup
+    clip: {fileID: 8300000, guid: 41f8a7139f95d434eb66a5362b165fe3, type: 3}
+    volume: 0.171
+    pitch: 1
+    source: {fileID: 0}
+  - name: Run
+    clip: {fileID: 8300000, guid: b34c74175f6c87346825fc21b957bdd6, type: 3}
+    volume: 0.334
+    pitch: 1
+    source: {fileID: 0}
+  - name: Shank
+    clip: {fileID: 8300000, guid: 998f0c01aef4f394eb1b5d053c7ae543, type: 3}
+    volume: 0.485
+    pitch: 1.19
+    source: {fileID: 0}
+  - name: Sell
+    clip: {fileID: 8300000, guid: 108dbf695ff86c74ea8f1ce32f47a8a7, type: 3}
+    volume: 0.784
+    pitch: 1
+    source: {fileID: 0}
 --- !u!4 &775364855
 Transform:
   m_ObjectHideFlags: 0

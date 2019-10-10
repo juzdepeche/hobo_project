@@ -184,7 +184,6 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        //gameObject.SetActive(false);
         for (var i =0; i < inventory.appleNumber; i++)
         {
             GameObjectFactory.Instance.SpawnApple(gameObject.transform);
@@ -207,15 +206,13 @@ public class PlayerController : MonoBehaviour
     {
         if (canBeShank)
         {
-            var audio = gameObject.GetComponentsInParent<AudioSource>().FirstOrDefault(a => a.clip.name.Contains("carhit"));
-            if (audio)
-                audio.Play();
-
+            AudioManager.Instance.Play("CarHit");
+            AudioManager.Instance.Play("Shank");
             shankHalo.enabled = true;
             isShanked = true;
             canMove = false;
             canBeShank = false;
-            transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
+            //transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
             GameObjectFactory.Instance.SpawnMoneyBag(MoneySpawnPoint, inventory.money == 1 ? 1 : inventory.money / 2);
             inventory.money = inventory.money == 1 ? 1 : inventory.money / 2;
             StartCoroutine(Revive());
@@ -230,7 +227,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetShank()
     {
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+        //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         canMove = true;
         isShanked = false;
         StartCoroutine(SetCanBeShank(true));
