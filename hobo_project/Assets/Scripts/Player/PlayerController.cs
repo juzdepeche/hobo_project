@@ -101,30 +101,34 @@ public class PlayerController : MonoBehaviour
         var posBelly = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
         RaycastHit hitBelly;
         bool haveHitBelly = Physics.Raycast(posBelly, fwd, out hitBelly, 1);
-        Debug.DrawRay(posBelly, fwd, Color.green);
+        //Debug.DrawRay(posBelly, fwd, Color.green);
         
         //for raycast #2 feet - fowards
         var posFeet = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         RaycastHit hitFeet;
         bool haveHitFeet = Physics.Raycast(posFeet, fwd, out hitFeet, 1);
-        if (haveHitFeet)
-            print(hitFeet.collider.name);
-        Debug.DrawRay(posFeet, fwd, Color.green);
+        //Debug.DrawRay(posFeet, fwd, Color.green);
         
         //for raycast #3 under the character - fowards
         var posUnderChar = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
         RaycastHit hitUnderChar;
         bool haveHitUnderChar = Physics.Raycast(posUnderChar, fwd, out hitUnderChar, 1);
-        Debug.DrawRay(posUnderChar, fwd, Color.green);
+        //Debug.DrawRay(posUnderChar, fwd, Color.green);
 
         //for raycast #4 BellowChar - down
         RaycastHit hitBellowChar;
-        bool haveHitBellowChar = Physics.Raycast(transform.position, dwd, out hitBellowChar, 1);      
-        Debug.DrawRay(transform.position, dwd, Color.green);
+        bool haveHitBellowChar = Physics.Raycast(transform.position, dwd, out hitBellowChar, 1);
+        //Debug.DrawRay(transform.position, dwd, Color.green);
 
         // LOGIC
-        //is grounded == Raycast#2, #3 & #4 hit 
         if (haveHitBellowChar && hitBellowChar.distance < 0.1)
+        {
+            var upPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, upPos, speed * Time.deltaTime);
+        }
+
+        //is grounded == Raycast#2, #3 & #4 hit 
+        if (haveHitBellowChar && hitBellowChar.distance < 0.2)
             isGrounded = true;
 
         //going down
@@ -133,7 +137,8 @@ public class PlayerController : MonoBehaviour
             var downPos = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, downPos, speed * Time.deltaTime);            
         }
-
+      
+        /*
         //is jumping == #1 no hit, #2 & #3 hit
         if (!haveHitBelly && (haveHitFeet && haveHitBellowChar) || isJumping)
         {
@@ -141,12 +146,12 @@ public class PlayerController : MonoBehaviour
             var upPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, upPos, speed * Time.deltaTime);
         }
+        */
 
         if(!haveHitUnderChar)
         {
-            isJumping = false;
             isGrounded = false;
-        }
+        }        
     }
 
     
