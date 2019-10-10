@@ -2342,6 +2342,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91147f9c8877b30438e9124f89f21335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sounds:
+  - name: CarHit
+    clip: {fileID: 8300000, guid: 2d4af9bd2d2f22f4cbd42287162099c1, type: 3}
+    volume: 0.334
+    pitch: 1
+    source: {fileID: 0}
 --- !u!4 &775364855
 Transform:
   m_ObjectHideFlags: 0
