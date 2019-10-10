@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         Animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
-        //shankHalo.enabled = false;
+        shankHalo.enabled = false;
     }
 
     // Update is called once per frame
