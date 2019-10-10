@@ -167,7 +167,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &5727971368664932557
 MonoBehaviour:
@@ -187,7 +187,6 @@ MonoBehaviour:
   MoneySparkle: {fileID: 0}
   MoneySparklePoint: {fileID: 5727971368807256837}
   DustSteps: {fileID: 5727971370144635017}
-  DustStepsPoint: {fileID: 0}
   MoneySpawnPoint: {fileID: 5727971370311608496}
   DashForce: 20
   dashDuration: 1
@@ -195,6 +194,7 @@ MonoBehaviour:
   canBeShank: 1
   isShanked: 0
   shankHalo: {fileID: 5727971368634593627}
+  Mesh: {fileID: 0}
 --- !u!114 &5727971368664932554
 MonoBehaviour:
   m_ObjectHideFlags: 0

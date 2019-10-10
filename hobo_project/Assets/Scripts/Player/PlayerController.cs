@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     private Animator Animator;
     public GameObject Mesh;
 
+    private bool isGrounded = false;
+    private bool isJumping = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastPositionFix();
+
         time += Time.deltaTime;
 
         xMoveInput = player.Device.LeftStickX; // ?? player.Device.DPadX;
@@ -52,8 +57,14 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             rb.velocity = movement;
-            if (movement != Vector3.zero) Animator.SetBool("walk", true);
-            else Animator.SetBool("walk", false);
+            if (movement != Vector3.zero)
+            {
+                Animator.SetBool("walk", true);
+            }
+            else
+            {
+                Animator.SetBool("walk", false);
+            }
         }
         if (movement != Vector3.zero && canMove)
         {
@@ -79,6 +90,72 @@ public class PlayerController : MonoBehaviour
             Shank();
         }
     }
+
+    private void RaycastPositionFix()
+    {
+        //direction
+        Vector3 fwd = transform.TransformDirection(Vector3.forward * 1);
+        Vector3 dwd = transform.TransformDirection(Vector3.down * 1);
+
+        //for raycast #1 Belly Level - fowards
+        var posBelly = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
+        RaycastHit hitBelly;
+        bool haveHitBelly = Physics.Raycast(posBelly, fwd, out hitBelly, 1);
+        //Debug.DrawRay(posBelly, fwd, Color.green);
+        
+        //for raycast #2 feet - fowards
+        var posFeet = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        RaycastHit hitFeet;
+        bool haveHitFeet = Physics.Raycast(posFeet, fwd, out hitFeet, 1);
+        //Debug.DrawRay(posFeet, fwd, Color.green);
+        
+        //for raycast #3 under the character - fowards
+        var posUnderChar = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
+        RaycastHit hitUnderChar;
+        bool haveHitUnderChar = Physics.Raycast(posUnderChar, fwd, out hitUnderChar, 1);
+        //Debug.DrawRay(posUnderChar, fwd, Color.green);
+
+        //for raycast #4 BellowChar - down
+        RaycastHit hitBellowChar;
+        bool haveHitBellowChar = Physics.Raycast(transform.position, dwd, out hitBellowChar, 1);
+        //Debug.DrawRay(transform.position, dwd, Color.green);
+
+        // LOGIC
+        if (haveHitBellowChar && hitBellowChar.distance < 0.1)
+        {
+            var upPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, upPos, speed * Time.deltaTime);
+        }
+
+        //is grounded == Raycast#2, #3 & #4 hit 
+        if (haveHitBellowChar && hitBellowChar.distance < 0.2)
+            isGrounded = true;
+
+        //going down
+        if(!isJumping && !isGrounded)
+        {             
+            var downPos = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, downPos, speed * Time.deltaTime);            
+        }
+      
+        /*
+        //is jumping == #1 no hit, #2 & #3 hit
+        if (!haveHitBelly && (haveHitFeet && haveHitBellowChar) || isJumping)
+        {
+            isJumping = true;
+            var upPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, upPos, speed * Time.deltaTime);
+        }
+        */
+
+        if(!haveHitUnderChar)
+        {
+            isGrounded = false;
+        }        
+    }
+
+    
+        
 
     public void SetPlayerDevice(Player player)
     {

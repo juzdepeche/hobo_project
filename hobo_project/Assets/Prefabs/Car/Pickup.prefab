@@ -138,11 +138,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1167005428673589038}
     m_Modifications:
-    - target: {fileID: 1673684453879360399, guid: c07cd00335539134a88213fd38de797a,
-        type: 3}
-      propertyPath: m_Name
-      value: Squidgy
-      objectReference: {fileID: 0}
     - target: {fileID: 8522447565271320064, guid: c07cd00335539134a88213fd38de797a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -197,6 +192,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1673684453879360399, guid: c07cd00335539134a88213fd38de797a,
+        type: 3}
+      propertyPath: m_Name
+      value: Squidgy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c07cd00335539134a88213fd38de797a, type: 3}
