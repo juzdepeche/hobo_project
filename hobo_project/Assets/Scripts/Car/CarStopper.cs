@@ -20,7 +20,7 @@ public class CarStopper : MonoBehaviour
     {
         if (other.tag == "Car")
         {
-            var car = other.gameObject.GetComponent<CarMouvement>();
+            var car = other.gameObject.GetComponent<CarMovement>();
             if (car)
             {
                 car.needToStop = false;

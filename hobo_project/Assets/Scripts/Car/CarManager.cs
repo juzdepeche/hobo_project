@@ -52,7 +52,7 @@ public class CarManager : MonoBehaviour
 
     private void StopCars(bool Stop)
     {
-        var cars = FindObjectsOfType<CarMouvement>();
+        var cars = FindObjectsOfType<CarMovement>();
         if (cars.Any())
         {
             if (!Stop)
@@ -89,7 +89,7 @@ public class CarManager : MonoBehaviour
         if (isSpawning)
         {
             GameObject car = Instantiate(GetRandomVehicule(), carSpawner.position, carSpawner.rotation) as GameObject;
-            CarMouvement carMouvement = car.GetComponent<CarMouvement>();
+            CarMovement carMouvement = car.GetComponent<CarMovement>();
 
             if (carMouvement)
             {

@@ -10,7 +10,10 @@ public class PlayerController : MonoBehaviour
     private Player player;
     public float xMoveInput;
     public float yMoveInput;
+
     public float speed = 10f;
+    private float defaultSpeed;
+
     private Rigidbody rb;
     private Inventory inventory;
     public ParticleSystem MoneySparkle;
@@ -20,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private float time;
     private float dashInterval = 2f;
     public float DashForce;
-    public float dashDuration = 0.2f;
+    public float dashDuration = 0.1f;
     public bool canMove = true;
     public bool canBeShank = true;
     public bool isShanked = false;
@@ -29,11 +32,11 @@ public class PlayerController : MonoBehaviour
     public GameObject Mesh;
 
     private bool isGrounded = false;
-    private bool isJumping = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        defaultSpeed = speed;
         Animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
@@ -43,7 +46,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastPositionFix();
+        if (!isShanked)
+        {
+            RaycastPositionFix();
+        }
 
         time += Time.deltaTime;
 
@@ -96,26 +102,20 @@ public class PlayerController : MonoBehaviour
         //direction
         Vector3 fwd = transform.TransformDirection(Vector3.forward * 1);
         Vector3 dwd = transform.TransformDirection(Vector3.down * 1);
-
-        //for raycast #1 Belly Level - fowards
-        var posBelly = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
-        RaycastHit hitBelly;
-        bool haveHitBelly = Physics.Raycast(posBelly, fwd, out hitBelly, 1);
-        //Debug.DrawRay(posBelly, fwd, Color.green);
         
-        //for raycast #2 feet - fowards
+        //for raycast #1 feet - fowards
         var posFeet = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         RaycastHit hitFeet;
         bool haveHitFeet = Physics.Raycast(posFeet, fwd, out hitFeet, 1);
         //Debug.DrawRay(posFeet, fwd, Color.green);
         
-        //for raycast #3 under the character - fowards
+        //for raycast #2 under the character - fowards
         var posUnderChar = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
         RaycastHit hitUnderChar;
         bool haveHitUnderChar = Physics.Raycast(posUnderChar, fwd, out hitUnderChar, 1);
         //Debug.DrawRay(posUnderChar, fwd, Color.green);
 
-        //for raycast #4 BellowChar - down
+        //for raycast #3 BellowChar - down
         RaycastHit hitBellowChar;
         bool haveHitBellowChar = Physics.Raycast(transform.position, dwd, out hitBellowChar, 1);
         //Debug.DrawRay(transform.position, dwd, Color.green);
@@ -127,36 +127,24 @@ public class PlayerController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, upPos, speed * Time.deltaTime);
         }
 
-        //is grounded == Raycast#2, #3 & #4 hit 
         if (haveHitBellowChar && hitBellowChar.distance < 0.2)
+        {
             isGrounded = true;
+        }
 
         //going down
-        if(!isJumping && !isGrounded)
+        if(!isGrounded)
         {             
             var downPos = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, downPos, speed * Time.deltaTime);            
         }
-      
-        /*
-        //is jumping == #1 no hit, #2 & #3 hit
-        if (!haveHitBelly && (haveHitFeet && haveHitBellowChar) || isJumping)
-        {
-            isJumping = true;
-            var upPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, upPos, speed * Time.deltaTime);
-        }
-        */
-
+     
         if(!haveHitUnderChar)
         {
             isGrounded = false;
         }        
     }
-
-    
-        
-
+            
     public void SetPlayerDevice(Player player)
     {
         this.player = player;
@@ -184,7 +172,6 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        //gameObject.SetActive(false);
         for (var i =0; i < inventory.appleNumber; i++)
         {
             GameObjectFactory.Instance.SpawnApple(gameObject.transform);
@@ -194,16 +181,16 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        var audio = gameObject.GetComponents<AudioSource>().FirstOrDefault(a => a.clip.name.Contains("run"));
-        if (audio)
-            audio.Play();
+        //Vector3 force = transform.forward + new Vector3(rb.velocity.x, 0.05f, rb.velocity.z);
+        //rb.AddForce(force * DashForce, ForceMode.VelocityChange);
 
-        Vector3 force = transform.forward + new Vector3(rb.velocity.x, 0.05f, rb.velocity.z);
-        rb.AddForce(force * DashForce, ForceMode.VelocityChange);
+        speed *= 3;
+
         DustSteps.Play();
         yield return new WaitForSeconds(dashDuration);
         DustSteps.Stop();
-        rb.velocity = Vector3.zero;
+        speed = defaultSpeed;
+        //rb.velocity = Vector3.zero;
     }
 
     public void Shank()
