@@ -181,11 +181,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        //Vector3 force = transform.forward + new Vector3(rb.velocity.x, 0.05f, rb.velocity.z);
-        //rb.AddForce(force * DashForce, ForceMode.VelocityChange);
-
         speed *= 3;
-
+        AudioManager.Instance.Play("Run");
         DustSteps.Play();
         yield return new WaitForSeconds(dashDuration);
         DustSteps.Stop();
@@ -197,10 +194,8 @@ public class PlayerController : MonoBehaviour
     {
         if (canBeShank)
         {
-            var audio = gameObject.GetComponentsInParent<AudioSource>().FirstOrDefault(a => a.clip.name.Contains("carhit"));
-            if (audio)
-                audio.Play();
-
+            AudioManager.Instance.Play("CarHit");
+            AudioManager.Instance.Play("Shank");
             shankHalo.enabled = true;
             isShanked = true;
             canMove = false;

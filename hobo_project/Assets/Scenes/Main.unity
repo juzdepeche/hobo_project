@@ -2313,6 +2313,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1117808424}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &775364853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 775364855}
+  - component: {fileID: 775364854}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &775364854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775364853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91147f9c8877b30438e9124f89f21335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - name: CarHit
+    clip: {fileID: 8300000, guid: 2d4af9bd2d2f22f4cbd42287162099c1, type: 3}
+    volume: 0.334
+    pitch: 1
+    source: {fileID: 0}
+  - name: Pickup
+    clip: {fileID: 8300000, guid: 41f8a7139f95d434eb66a5362b165fe3, type: 3}
+    volume: 0.171
+    pitch: 1
+    source: {fileID: 0}
+  - name: Run
+    clip: {fileID: 8300000, guid: b34c74175f6c87346825fc21b957bdd6, type: 3}
+    volume: 0.334
+    pitch: 1
+    source: {fileID: 0}
+  - name: Shank
+    clip: {fileID: 8300000, guid: 998f0c01aef4f394eb1b5d053c7ae543, type: 3}
+    volume: 0.485
+    pitch: 1.19
+    source: {fileID: 0}
+  - name: Sell
+    clip: {fileID: 8300000, guid: 108dbf695ff86c74ea8f1ce32f47a8a7, type: 3}
+    volume: 0.784
+    pitch: 1
+    source: {fileID: 0}
+--- !u!4 &775364855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775364853}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.6035156, y: -10.878906, z: 4.671875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &816886665
 GameObject:
   m_ObjectHideFlags: 0

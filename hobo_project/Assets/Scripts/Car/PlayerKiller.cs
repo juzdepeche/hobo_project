@@ -9,6 +9,7 @@ public class PlayerKiller : MonoBehaviour
         if (other.tag == "Player" && !GetComponentInParent<CarMovement>().hasToStop)
         {
             var player = other.gameObject.GetComponent<PlayerController>();
+            AudioManager.Instance.Play("CarHit");
             GameController.Instance.NotifyPlayerState(player, "player_death", true, KillPlayer);
         }
     }
