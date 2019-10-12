@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
             isShanked = true;
             canMove = false;
             canBeShank = false;
-            transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
+            //transform.eulerAngles = new Vector3(90f, transform.eulerAngles.y, transform.eulerAngles.z);
             GameObjectFactory.Instance.SpawnMoneyBag(MoneySpawnPoint, inventory.money == 1 ? 1 : inventory.money / 2);
             inventory.money = inventory.money == 1 ? 1 : inventory.money / 2;
             StartCoroutine(Revive());
@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetShank()
     {
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+        //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         canMove = true;
         isShanked = false;
         StartCoroutine(SetCanBeShank(true));
