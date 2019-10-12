@@ -2,9 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Squidgy : MonoBehaviour
+public class CarSquidgy : MonoBehaviour
 {
+    private bool wantToBeSquid = false;
     private bool hasBeenSquid = false;
+
+    private GameObject interactionPossible;
+
+    private void Start()
+    {
+        
+    }
+
+    public void doIwantToBeSquid()
+    {
+        wantToBeSquid = Random.Range(0, 4) == 0;
+        gameObject.SetActive(wantToBeSquid);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,21 +40,20 @@ public class Squidgy : MonoBehaviour
     {
         BaseResponse response = new BaseResponse();
         response.Success = true;
-        if (!hasBeenSquid)
+        if (!hasBeenSquid && wantToBeSquid)
         {
             hasBeenSquid = true;
-            bool playerGetsMoney = Random.Range(0, 3) == 0;
 
-            if (playerGetsMoney)
+            var ctrl = player.GetComponent<PlayerController>();
+            var inventory = player.GetComponent<Inventory>();
+            if (ctrl)
             {
-                var ctrl = player.GetComponent<PlayerController>();
-                var inventory = player.GetComponent<Inventory>();
-                if (ctrl)
-                {
-                    inventory.AddMoney(Random.Range(1, 6));
-                    ctrl.SparkMoney();
-                }
+                inventory.AddMoney(Random.Range(5, 10));
+                ctrl.SparkMoney();
             }
+
+            wantToBeSquid = false;
+            gameObject.SetActive(wantToBeSquid);
         }
 
         return response;

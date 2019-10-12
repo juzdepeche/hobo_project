@@ -19,11 +19,18 @@ public class CarMovement : MonoBehaviour
 
 
     private float speed = 10.0f;
+
+    bool randomSquidgy = false;
+    private CarSquidgy squidgy;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        squidgy = gameObject.GetComponentInChildren<CarSquidgy>();
+        if (squidgy)
+        {
+            squidgy.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -33,10 +40,23 @@ public class CarMovement : MonoBehaviour
         {
             GetComponent<Collider>().isTrigger = true;
             transform.position += (transform.forward * speed) * Time.deltaTime;
+
+            if (squidgy && randomSquidgy)
+            {
+                squidgy.gameObject.SetActive(false);
+            }
         }
         else
         {
             GetComponent<Collider>().isTrigger = false;
+            if (squidgy)
+            {
+                if (!randomSquidgy)
+                {
+                    randomSquidgy = true;
+                    squidgy.doIwantToBeSquid();
+                }
+            }
         }
     }
 }
