@@ -6,7 +6,7 @@ public class PlayerKiller : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && !GetComponentInParent<CarMouvement>().hasToStop)
+        if (other.tag == "Player" && !GetComponentInParent<CarMovement>().hasToStop)
         {
             var player = other.gameObject.GetComponent<PlayerController>();
             AudioManager.Instance.Play("CarHit");

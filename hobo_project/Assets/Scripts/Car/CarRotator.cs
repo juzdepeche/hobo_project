@@ -20,7 +20,7 @@ public class CarRotator : MonoBehaviour
     {
         if (other.tag == "Car")
         {
-            var car = other.GetComponent<CarMouvement>();
+            var car = other.GetComponent<CarMovement>();
             var managerOfThisKiller = this.gameObject.GetComponentInParent<CarManager>();
 
             if (car && managerOfThisKiller && managerOfThisKiller.id == car.spawnId)

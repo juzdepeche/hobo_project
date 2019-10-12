@@ -22,7 +22,7 @@ public class CarParking : MonoBehaviour
     {
         if (other.tag == "Car")
         {
-            var car = other.gameObject.GetComponent<CarMouvement>();
+            var car = other.gameObject.GetComponent<CarMovement>();
             if (car && car.askToStop && car.parkingId == id)
             {
                 car.hasToStop = true;
